@@ -1,0 +1,2706 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis HOTS Biologi Kelas XI — Sistem Pencernaan Makanan</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            emerald: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Custom scrollbar for smooth reading of HOTS stimuli and question grid */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .stimulus-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin-top: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .stimulus-table th,
+    .stimulus-table td {
+      border: 1px solid #cbd5e1;
+      padding: 0.5rem 0.75rem;
+      text-align: left;
+    }
+    .stimulus-table th {
+      background-color: #ecfdf5;
+      color: #065f46;
+      font-weight: 600;
+    }
+    .stimulus-table tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-emerald-200 selection:text-emerald-900">
+
+  <!-- ==================== GLOBAL TOP NAVBAR ==================== -->
+  <header id="app-header" class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
+      <!-- Brand Identity -->
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-sm shrink-0">
+          <!-- Biology / Digestive Microvilli SVG Icon -->
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+          </svg>
+        </div>
+        <div class="truncate">
+          <h1 class="font-display font-bold text-slate-900 text-sm sm:text-base truncate">BioLab XI — Sistem Pencernaan</h1>
+          <p class="text-xs text-slate-500 hidden sm:block">Evaluasi HOTS (C4–C6) • 50 Butir Soal Terintegrasi</p>
+        </div>
+      </div>
+
+      <!-- Persistent Student Info & Timer (Visible during Quiz) -->
+      <div id="quiz-live-bar" class="hidden items-center gap-2 sm:gap-4">
+        <div class="hidden md:flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span id="header-student-name" class="text-xs font-semibold text-emerald-900 max-w-[150px] truncate">-</span>
+          <span class="text-emerald-300">|</span>
+          <span id="header-student-class" class="text-xs font-bold text-emerald-700 bg-white px-2 py-0.5 rounded-md border border-emerald-200">-</span>
+        </div>
+
+        <div id="timer-badge" class="flex items-center gap-1.5 bg-amber-50 border border-amber-300 text-amber-900 px-3 py-1.5 rounded-xl font-mono font-bold text-sm shadow-xs">
+          <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <span id="timer-display">75:00</span>
+        </div>
+
+        <button onclick="openSubmitModal()" class="bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-xl shadow-xs transition cursor-pointer">
+          Selesai & Kumpulkan
+        </button>
+      </div>
+
+      <!-- Mode Switcher (Visible on Home / Dashboard / Result) -->
+      <div id="nav-actions" class="flex items-center gap-2">
+        <button id="btn-nav-student" onclick="switchView('home')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 transition cursor-pointer">
+          Beranda Siswa
+        </button>
+        <button id="btn-nav-teacher" onclick="switchView('teacher')" class="px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-900 text-white hover:bg-slate-800 transition flex items-center gap-1.5 shadow-xs cursor-pointer">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+          </svg>
+          <span>Dasbor Guru</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Student Identity Sub-bar during Quiz -->
+    <div id="mobile-student-subbar" class="hidden md:hidden bg-emerald-900 text-white px-4 py-1.5 text-xs flex items-center justify-between">
+      <span class="truncate font-medium">Peserta: <strong id="mobile-header-name">-</strong></span>
+      <span class="bg-emerald-700 px-2 py-0.5 rounded font-semibold shrink-0" id="mobile-header-class">-</span>
+    </div>
+  </header>
+
+  <!-- ==================== MAIN CONTENT CONTAINER ==================== -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+    <!-- ==================== VIEW 1: STUDENT HOME & IDENTITY BAR ==================== -->
+    <section id="view-home" class="space-y-8">
+      <!-- Hero Banner -->
+      <div class="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 rounded-3xl p-6 sm:p-10 text-white shadow-lg relative overflow-hidden">
+        <div class="absolute -right-12 -top-12 w-64 h-64 rounded-full bg-emerald-500/10 blur-2xl pointer-events-none"></div>
+        <div class="absolute right-10 bottom-0 w-48 h-48 rounded-full bg-amber-400/10 blur-2xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-3xl space-y-4">
+          <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-xs border border-white/20 px-3.5 py-1.5 rounded-full text-xs font-semibold text-emerald-100">
+            <span>Biologi SMA/MA Kelas XI • Fase F</span>
+            <span>•</span>
+            <span class="text-amber-300">Kurikulum Merdeka</span>
+          </div>
+          <h2 class="font-display text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight">
+            Asesmen Sumatif HOTS: Struktur & Fungsi Sistem Pencernaan Makanan
+          </h2>
+          <p class="text-emerald-100/90 text-sm sm:text-base leading-relaxed">
+            Uji kemampuan berpikir tingkat tinggi (analisis eksperimen, studi kasus klinis, kinetika enzim, regulasi hormonal, hingga perbandingan pencernaan ruminansia). Nilai akan otomatis terekam pada akun guru pembuat soal.
+          </p>
+
+          <!-- Key Specs Badges -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div class="bg-white/10 border border-white/15 rounded-2xl p-3">
+              <div class="text-xs text-emerald-200">Jumlah Soal</div>
+              <div class="font-display font-bold text-lg sm:text-xl">50 PG HOTS</div>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-2xl p-3">
+              <div class="text-xs text-emerald-200">Level Kognitif</div>
+              <div class="font-display font-bold text-lg sm:text-xl">C4 – C6</div>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-2xl p-3">
+              <div class="text-xs text-emerald-200">Alokasi Waktu</div>
+              <div class="font-display font-bold text-lg sm:text-xl">75 Menit</div>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-2xl p-3">
+              <div class="text-xs text-emerald-200">Opsi Jawaban</div>
+              <div class="font-display font-bold text-lg sm:text-xl">5 Opsi (A–E)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mandatory Student Identity Bar Card -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <div class="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+          <div class="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Langkah Wajib Sebelum Mulai</span>
+              <h3 class="font-display text-xl font-bold text-slate-900 mt-0.5">Identitas Peserta Kuis</h3>
+              <p class="text-sm text-slate-500 mt-1">Isi Nama Lengkap dan Kelas Anda dengan benar agar nilai tercatat rapi di rekapitulasi guru.</p>
+            </div>
+            <div id="cloud-status-badge" class="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Server Siap</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <!-- Input Nama Lengkap -->
+            <div class="space-y-2">
+              <label for="input-student-name" class="block text-sm font-semibold text-slate-700">
+                Nama Lengkap Siswa <span class="text-rose-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="input-student-name"
+                placeholder="Contoh: Nadira Putri Ramadhani"
+                oninput="validateStudentForm()"
+                class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm font-medium text-slate-900 transition"
+              />
+              <p class="text-xs text-slate-400">Gunakan nama asli sesuai daftar presensi kelas.</p>
+            </div>
+
+            <!-- Pilihan Kelas -->
+            <div class="space-y-2">
+              <label for="select-student-class" class="block text-sm font-semibold text-slate-700">
+                Kelas <span class="text-rose-500">*</span>
+              </label>
+              <select
+                id="select-student-class"
+                onchange="handleClassSelectChange()"
+                class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm font-medium text-slate-900 bg-white transition"
+              >
+                <option value="">-- Pilih Kelas Anda --</option>
+                <option value="XI IPA 1">XI IPA 1</option>
+                <option value="XI IPA 2">XI IPA 2</option>
+                <option value="XI IPA 3">XI IPA 3</option>
+                <option value="XI IPA 4">XI IPA 4</option>
+                <option value="XI IPA 5">XI IPA 5</option>
+                <option value="XI IPA 6">XI IPA 6</option>
+                <option value="CUSTOM">Lainnya (Tulis Nama Kelas Sendiri)...</option>
+              </select>
+
+              <!-- Custom Class Input (Shown when CUSTOM selected) -->
+              <div id="custom-class-wrapper" class="hidden pt-1">
+                <input
+                  type="text"
+                  id="input-custom-class"
+                  placeholder="Contoh: XI Fase F-2 / XI MIPA 7"
+                  oninput="validateStudentForm()"
+                  class="w-full px-4 py-2.5 rounded-xl border border-emerald-300 bg-emerald-50/40 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-500/20 outline-none text-sm font-medium text-slate-900 transition"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Active Creator Info Notice -->
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 font-bold text-sm">
+                G
+              </div>
+              <div>
+                <div class="text-xs text-slate-500">Tujuan Pengumpulan Nilai:</div>
+                <div id="home-creator-label" class="text-sm font-semibold text-slate-800">Akun Guru Biologi Kelas XI (Terhubung Otomatis)</div>
+              </div>
+            </div>
+            <span class="text-xs font-medium text-emerald-700 bg-emerald-100/80 px-2.5 py-1 rounded-lg self-start sm:self-center">
+              Rekap Real-Time Aktif
+            </span>
+          </div>
+
+          <!-- Start Quiz CTA -->
+          <div class="pt-2">
+            <button
+              id="btn-start-quiz"
+              disabled
+              onclick="startQuiz()"
+              class="w-full py-4 px-6 rounded-2xl font-display font-bold text-base text-white bg-slate-300 cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-sm"
+            >
+              <span>Lengkapi Nama & Kelas untuk Memulai Kuis</span>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Kisi-Kisi Materi Card -->
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 space-y-4">
+          <h4 class="font-display font-bold text-slate-900 text-base flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+            Kisi-Kisi 6 Sub-Bab (50 Soal)
+          </h4>
+          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-600">
+            <li class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-50">
+              <span>1. Zat Makanan, Uji Reagen & Kebutuhan Energi (BMR/BMI)</span>
+              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded shrink-0">9 Soal</span>
+            </li>
+            <li class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-50">
+              <span>2. Struktur & Fungsi Organ Saluran + Kelenjar Pencernaan</span>
+              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded shrink-0">8 Soal</span>
+            </li>
+            <li class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-50">
+              <span>3. Mekanisme Pencernaan & Kinetika Kerja Enzim</span>
+              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded shrink-0">10 Soal</span>
+            </li>
+            <li class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-50">
+              <span>4. Regulasi Hormonal & Saraf Pencernaan</span>
+              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded shrink-0">6 Soal</span>
+            </li>
+            <li class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-50">
+              <span>5. Gangguan Klinis & Teknologi Diagnostik</span>
+              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded shrink-0">10 Soal</span>
+            </li>
+            <li class="flex items-start justify-between gap-2 p-2.5 rounded-xl bg-slate-50">
+              <span>6. Perbandingan Manusia & Hewan Ruminansia</span>
+              <span class="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded shrink-0">7 Soal</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 2: ACTIVE QUIZ WORKSPACE ==================== -->
+    <section id="view-quiz" class="hidden">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left/Main Column: Question Card -->
+        <div class="lg:col-span-8 space-y-5">
+          <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6">
+            <!-- Question Header Meta -->
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-4">
+              <div class="flex items-center gap-2">
+                <span id="q-number-badge" class="bg-emerald-700 text-white font-display font-bold text-sm px-3.5 py-1.5 rounded-xl">
+                  Soal 1 / 50
+                </span>
+                <span id="q-level-badge" class="bg-amber-100 text-amber-900 font-bold text-xs px-2.5 py-1 rounded-lg border border-amber-200">
+                  C4 • Analisis
+                </span>
+              </div>
+              <span id="q-topic-badge" class="text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1 rounded-lg">
+                Topik
+              </span>
+            </div>
+
+            <!-- HOTS Stimulus Box (Case Study, Table, or SVG Chart) -->
+            <div id="q-stimulus-box" class="bg-slate-50 border-l-4 border-emerald-600 rounded-r-2xl p-4 sm:p-5 text-sm text-slate-700 leading-relaxed space-y-3">
+              <!-- Populated dynamically -->
+            </div>
+
+            <!-- Question Stem -->
+            <div id="q-stem" class="text-base sm:text-lg font-semibold text-slate-900 leading-relaxed">
+              <!-- Populated dynamically -->
+            </div>
+
+            <!-- 5 Options (A, B, C, D, E) -->
+            <div id="q-options-container" class="space-y-3">
+              <!-- Populated dynamically -->
+            </div>
+
+            <!-- Bottom Navigation & Flag Controls -->
+            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+              <button
+                id="btn-prev-q"
+                onclick="navigateQuestion(currentQuestionIdx - 1)"
+                class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-sm flex items-center gap-1.5 transition cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+                <span>Sebelumnya</span>
+              </button>
+
+              <button
+                id="btn-flag-q"
+                onclick="toggleFlagCurrent()"
+                class="px-4 py-2.5 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100 font-semibold text-sm flex items-center gap-2 transition cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5" />
+                </svg>
+                <span id="flag-btn-text">Tandai Ragu-Ragu</span>
+              </button>
+
+              <button
+                id="btn-next-q"
+                onclick="navigateQuestion(currentQuestionIdx + 1)"
+                class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm flex items-center gap-1.5 shadow-xs transition cursor-pointer"
+              >
+                <span>Selanjutnya</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Interactive 1–50 Question Number Grid -->
+        <aside class="lg:col-span-4 bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-6 space-y-5 lg:sticky lg:top-20">
+          <div class="flex items-center justify-between">
+            <h3 class="font-display font-bold text-slate-900 text-base">Navigasi Nomor Soal</h3>
+            <span id="answered-counter-badge" class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-lg">
+              0 / 50 Dijawab
+            </span>
+          </div>
+
+          <!-- Status Legend -->
+          <div class="grid grid-cols-3 gap-2 text-xs bg-slate-50 p-3 rounded-2xl border border-slate-100">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3.5 h-3.5 rounded bg-emerald-600 inline-block shrink-0"></span>
+              <span class="text-slate-600 font-medium">Dijawab</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-3.5 h-3.5 rounded bg-amber-400 inline-block shrink-0"></span>
+              <span class="text-slate-600 font-medium">Ragu</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="w-3.5 h-3.5 rounded bg-white border border-slate-300 inline-block shrink-0"></span>
+              <span class="text-slate-600 font-medium">Kosong</span>
+            </div>
+          </div>
+
+          <!-- 50 Number Grid -->
+          <div id="question-grid" class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2 max-h-[380px] overflow-y-auto pr-1">
+            <!-- Buttons 1..50 generated by JS -->
+          </div>
+
+          <button
+            onclick="openSubmitModal()"
+            class="w-full py-3 px-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-display font-bold text-sm shadow-sm transition cursor-pointer"
+          >
+            Selesai & Kumpulkan Jawaban
+          </button>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 3: STUDENT RESULT & CONCEPTUAL REVIEW ==================== -->
+    <section id="view-result" class="hidden space-y-8">
+      <!-- Score Summary Banner -->
+      <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-100 pb-6">
+          <div class="space-y-2">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800">
+              <span>✓ Hasil Evaluasi Tersimpan ke Akun Pembuat Soal</span>
+            </div>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-slate-900" id="res-student-name">-</h2>
+            <p class="text-sm text-slate-500">
+              Kelas: <strong class="text-slate-800" id="res-student-class">-</strong> • Waktu Pengerjaan: <strong class="text-slate-800" id="res-duration">-</strong>
+            </p>
+          </div>
+
+          <div class="flex items-center gap-4 bg-gradient-to-br from-emerald-50 to-teal-50 border border-emerald-200 p-5 rounded-3xl">
+            <div class="text-center">
+              <div class="text-xs font-bold uppercase tracking-wider text-emerald-700">Skor Akhir</div>
+              <div id="res-final-score" class="font-display text-4xl sm:text-5xl font-extrabold text-emerald-900">0</div>
+              <div class="text-xs text-slate-500 mt-0.5">Skala 0 – 100</div>
+            </div>
+            <div class="h-14 w-px bg-emerald-200"></div>
+            <div class="grid grid-cols-3 gap-3 text-center">
+              <div class="bg-white px-3 py-2 rounded-2xl border border-emerald-100">
+                <div class="text-xs text-slate-500">Benar</div>
+                <div id="res-correct-count" class="font-display font-bold text-lg text-emerald-600">0</div>
+              </div>
+              <div class="bg-white px-3 py-2 rounded-2xl border border-rose-100">
+                <div class="text-xs text-slate-500">Salah</div>
+                <div id="res-wrong-count" class="font-display font-bold text-lg text-rose-600">0</div>
+              </div>
+              <div class="bg-white px-3 py-2 rounded-2xl border border-slate-200">
+                <div class="text-xs text-slate-500">Kosong</div>
+                <div id="res-empty-count" class="font-display font-bold text-lg text-slate-600">0</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Topic Mastery Breakdown -->
+        <div class="pt-6 space-y-4">
+          <h3 class="font-display font-bold text-slate-900 text-base">Analisis Penguasaan Per Sub-Bab Materi</h3>
+          <div id="res-topic-breakdown" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Generated dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed Question-by-Question Conceptual Review -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 sm:p-5 rounded-2xl border border-slate-200">
+          <div>
+            <h3 class="font-display font-bold text-lg text-slate-900">Pembahasan Konseptual Lengkap (50 Soal)</h3>
+            <p class="text-xs text-slate-500">Pelajari analisis ilmiah untuk setiap soal agar konsep sistem pencernaan semakin matang.</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="filterReview('all')" id="rev-filter-all" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white cursor-pointer">Semua (50)</button>
+            <button onclick="filterReview('wrong')" id="rev-filter-wrong" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">Salah / Kosong</button>
+            <button onclick="filterReview('correct')" id="rev-filter-correct" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">Benar</button>
+          </div>
+        </div>
+
+        <div id="res-review-list" class="space-y-4">
+          <!-- Review cards generated dynamically -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VIEW 4: TEACHER / CREATOR DASHBOARD ==================== -->
+    <section id="view-teacher" class="hidden space-y-6">
+      
+      <!-- Teacher Auth Gate (Shown when teacher hasn't unlocked dashboard yet) -->
+      <div id="teacher-auth-panel" class="max-w-2xl mx-auto bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+        <div class="text-center space-y-2">
+          <div class="w-14 h-14 rounded-2xl bg-slate-900 text-amber-400 flex items-center justify-center mx-auto shadow-sm">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
+            </svg>
+          </div>
+          <h2 class="font-display text-2xl font-extrabold text-slate-900">Login Guru / Pembuat Soal</h2>
+          <p class="text-sm text-slate-500">
+            Masuk ke akun pembuat soal untuk memantau seluruh nilai siswa secara real-time, melihat analisis butir soal tersulit, dan mengunduh rekap Excel/CSV.
+          </p>
+        </div>
+
+        <!-- Option A: Google / Email Auth -->
+        <div class="space-y-3">
+          <button
+            onclick="signInTeacherWithGoogle()"
+            class="w-full py-3 px-4 rounded-2xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-sm flex items-center justify-center gap-3 shadow-2xs transition cursor-pointer"
+          >
+            <svg class="w-5 h-5" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z"/>
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.96H1.29v3.14C3.26 21.3 7.31 24 12 24z"/>
+              <path fill="#FBBC05" d="M5.28 14.24c-.24-.72-.38-1.49-.38-2.24s.14-1.52.38-2.24V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.99-3.14z"/>
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.99 3.14c.95-2.85 3.6-4.96 6.72-4.96z"/>
+            </svg>
+            <span>Masuk dengan Akun Google Pembuat Soal</span>
+          </button>
+        </div>
+
+        <div class="relative flex py-1 items-center">
+          <div class="flex-grow border-t border-slate-200"></div>
+          <span class="flex-shrink mx-3 text-xs font-medium text-slate-400">ATAU AKSES KLAIM PEMBUAT SOAL</span>
+          <div class="flex-grow border-t border-slate-200"></div>
+        </div>
+
+        <!-- Option B: Claim / Login with Creator Email & PIN (Works seamlessly even inside sandboxed iframes) -->
+        <div class="space-y-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Guru Pembuat Soal</label>
+              <input type="text" id="teacher-name-input" placeholder="Contoh: Drs. Ahmad Fauzi, M.Pd." class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-emerald-600" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Email Akun Pembuat Soal</label>
+              <input type="email" id="teacher-email-input" placeholder="guru.biologi@sekolah.sch.id" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-emerald-600" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-700 mb-1">PIN Akses Dasbor (Default: <code class="bg-amber-100 text-amber-900 px-1.5 py-0.5 rounded font-mono">BIOXI2026</code>)</label>
+            <input type="password" id="teacher-pin-input" value="BIOXI2026" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-emerald-600 font-mono" />
+          </div>
+          <button
+            onclick="loginTeacherWithPin()"
+            class="w-full py-3 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-display font-bold text-sm shadow-xs transition cursor-pointer"
+          >
+            Buka Dasbor Pembuat Soal & Klaim Akun
+          </button>
+        </div>
+      </div>
+
+      <!-- Teacher Authenticated Dashboard -->
+      <div id="teacher-dashboard-panel" class="hidden space-y-6">
+        <!-- Creator Profile & Action Bar -->
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-lg">Akun Pembuat Soal Aktif</span>
+              <span class="text-xs font-mono text-slate-500 bg-slate-100 px-2.5 py-1 rounded-lg">UID: <span id="dash-creator-uid">-</span></span>
+            </div>
+            <h2 class="font-display text-xl sm:text-2xl font-extrabold text-slate-900" id="dash-creator-name">Dasbor Guru Biologi</h2>
+            <p class="text-xs sm:text-sm text-slate-500" id="dash-creator-email">Seluruh nilai siswa otomatis dikumpulkan ke akun ini secara real-time.</p>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2.5">
+            <button onclick="openWebhookModal()" class="px-4 py-2.5 rounded-xl border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-800 font-semibold text-xs sm:text-sm flex items-center gap-1.5 transition cursor-pointer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+              </svg>
+              <span>Sinkronisasi Google Sheets</span>
+            </button>
+
+            <button onclick="exportSubmissionsCSV()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm flex items-center gap-1.5 shadow-xs transition cursor-pointer">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+              </svg>
+              <span>Unduh Rekap Excel (.CSV)</span>
+            </button>
+
+            <button onclick="logoutTeacher()" class="px-3.5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 font-semibold text-xs sm:text-sm transition cursor-pointer">
+              Keluar
+            </button>
+          </div>
+        </div>
+
+        <!-- Real-Time Summary Stats -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-2xs">
+            <div class="text-xs font-semibold text-slate-500">Total Siswa Mengumpulkan</div>
+            <div id="stat-total-students" class="font-display text-3xl font-extrabold text-slate-900 mt-1">0</div>
+            <div class="text-xs text-emerald-600 font-medium mt-1">Update Real-Time</div>
+          </div>
+          <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-2xs">
+            <div class="text-xs font-semibold text-slate-500">Rata-Rata Nilai</div>
+            <div id="stat-avg-score" class="font-display text-3xl font-extrabold text-emerald-700 mt-1">0.0</div>
+            <div class="text-xs text-slate-400 mt-1">Dari skala 100</div>
+          </div>
+          <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-2xs">
+            <div class="text-xs font-semibold text-slate-500">Nilai Tertinggi</div>
+            <div id="stat-max-score" class="font-display text-3xl font-extrabold text-blue-700 mt-1">0</div>
+            <div id="stat-max-student" class="text-xs text-slate-500 truncate mt-1">-</div>
+          </div>
+          <div class="bg-white p-5 rounded-3xl border border-slate-200 shadow-2xs">
+            <div class="text-xs font-semibold text-slate-500">Ketuntasan (KKM ≥ 75)</div>
+            <div id="stat-pass-rate" class="font-display text-3xl font-extrabold text-amber-600 mt-1">0%</div>
+            <div id="stat-pass-count" class="text-xs text-slate-500 mt-1">0 dari 0 siswa</div>
+          </div>
+        </div>
+
+        <!-- Tabs inside Teacher Dashboard: Daftar Nilai Siswa vs Analisis Soal Tersulit -->
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-5 sm:p-6 border-b border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+              <button onclick="switchTeacherSubtab('scores')" id="subtab-btn-scores" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-white cursor-pointer">
+                Daftar Nilai Siswa
+              </button>
+              <button onclick="switchTeacherSubtab('analysis')" id="subtab-btn-analysis" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+                Analisis Butir Soal Tersulit
+              </button>
+            </div>
+
+            <!-- Filter & Search Controls -->
+            <div id="teacher-filter-controls" class="flex flex-wrap items-center gap-2.5">
+              <select id="filter-class-select" onchange="renderTeacherTable()" class="px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium bg-white outline-none focus:border-emerald-600">
+                <option value="ALL">Semua Kelas</option>
+                <option value="XI IPA 1">XI IPA 1</option>
+                <option value="XI IPA 2">XI IPA 2</option>
+                <option value="XI IPA 3">XI IPA 3</option>
+                <option value="XI IPA 4">XI IPA 4</option>
+                <option value="XI IPA 5">XI IPA 5</option>
+                <option value="XI IPA 6">XI IPA 6</option>
+              </select>
+
+              <input
+                type="text"
+                id="search-student-input"
+                oninput="renderTeacherTable()"
+                placeholder="Cari nama siswa..."
+                class="px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm outline-none focus:border-emerald-600 w-44 sm:w-56"
+              />
+            </div>
+          </div>
+
+          <!-- Subtab 1: Student Scores Table -->
+          <div id="teacher-subtab-scores" class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-500">
+                  <th class="py-3.5 px-4">No</th>
+                  <th class="py-3.5 px-4">Nama Lengkap Siswa</th>
+                  <th class="py-3.5 px-4">Kelas</th>
+                  <th class="py-3.5 px-4 text-center">Skor</th>
+                  <th class="py-3.5 px-4 text-center">Benar / Salah / Kosong</th>
+                  <th class="py-3.5 px-4">Durasi</th>
+                  <th class="py-3.5 px-4">Waktu Kumpul</th>
+                </tr>
+              </thead>
+              <tbody id="teacher-scores-tbody" class="divide-y divide-slate-100 text-sm">
+                <tr>
+                  <td colspan="7" class="py-10 text-center text-slate-400">Belum ada data nilai siswa yang masuk.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Subtab 2: Hardest Questions Item Analysis -->
+          <div id="teacher-subtab-analysis" class="hidden p-6 space-y-4">
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs sm:text-sm text-amber-900">
+              <strong>Analisis Butir Soal Otomatis:</strong> Mengurutkan soal HOTS dari persentase jawaban benar terendah berdasarkan seluruh jawaban siswa yang masuk untuk membantu guru memetakan materi remedial.
+            </div>
+            <div id="hardest-questions-list" class="space-y-3">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== CUSTOM MODALS (NO BROWSER ALERT/CONFIRM) ==================== -->
+  <!-- 1. Submit Quiz Confirmation Modal -->
+  <div id="modal-submit" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-xl space-y-5">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-display font-bold text-lg text-slate-900">Kumpulkan Jawaban Kuis?</h3>
+          <p class="text-xs text-slate-500">Pastikan seluruh soal telah diperiksa kembali.</p>
+        </div>
+      </div>
+
+      <div id="modal-submit-summary" class="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-sm space-y-1.5">
+        <!-- Summary injected by JS -->
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button onclick="closeSubmitModal()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50 cursor-pointer">
+          Kembali Cek Soal
+        </button>
+        <button onclick="confirmSubmitQuiz(false)" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-xs cursor-pointer">
+          Ya, Kumpulkan Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Google Sheets Apps Script Webhook Modal -->
+  <div id="modal-webhook" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-7 shadow-xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <div>
+          <h3 class="font-display font-bold text-lg text-slate-900">Sinkronisasi Opsional ke Google Sheets</h3>
+          <p class="text-xs text-slate-500">Teruskan otomatis setiap nilai siswa ke Google Spreadsheet pribadi Anda.</p>
+        </div>
+        <button onclick="closeWebhookModal()" class="text-slate-400 hover:text-slate-600 p-1 cursor-pointer">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs sm:text-sm text-slate-600">
+        <p><strong>Langkah 1:</strong> Buka Google Sheets baru → klik menu <em>Ekstensi (Extensions) &gt; Apps Script</em>, lalu tempel kode berikut dan Deploy sebagai <em>Web App (Akses: Siapa saja / Anyone)</em>:</p>
+        <div class="relative">
+          <pre id="apps-script-code" class="bg-slate-900 text-emerald-300 p-4 rounded-2xl text-xs overflow-x-auto font-mono leading-relaxed">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow(["Waktu Submit", "Nama Siswa", "Kelas", "Skor", "Benar", "Salah", "Kosong", "Durasi"]);
+  }
+  var data = JSON.parse(e.postData.contents);
+  sheet.appendRow([
+    data.submittedAtText,
+    data.nama,
+    data.kelas,
+    data.skor,
+    data.benar,
+    data.salah,
+    data.kosong,
+    data.durasiText
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({status: "ok"})).setMimeType(ContentService.MimeType.JSON);
+}</pre>
+          <button onclick="copyAppsScriptCode()" class="absolute top-2.5 right-2.5 bg-white/15 hover:bg-white/25 text-white text-xs font-semibold px-3 py-1.5 rounded-lg backdrop-blur-xs cursor-pointer">
+            Salin Kode
+          </button>
+        </div>
+
+        <p><strong>Langkah 2:</strong> Tempel URL Web App Google Apps Script Anda di bawah ini:</p>
+        <input type="url" id="webhook-url-input" placeholder="https://script.google.com/macros/s/AKfycb.../exec" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-emerald-600" />
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-2 border-t border-slate-100">
+        <button onclick="closeWebhookModal()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm cursor-pointer">Tutup</button>
+        <button onclick="saveWebhookUrl()" class="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm cursor-pointer">Simpan URL Webhook</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Non-Blocking Toast Notification -->
+  <div id="toast-notification" class="hidden fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-4 py-3 rounded-2xl shadow-lg text-xs sm:text-sm font-medium flex items-center gap-2.5 max-w-sm">
+    <span id="toast-icon" class="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0"></span>
+    <span id="toast-message">Notifikasi</span>
+  </div>
+
+  <!-- ==================== COMPLETE 50 HOTS QUESTIONS BANK ==================== -->
+  <script>
+    /**
+     * Bank 50 Soal Pilihan Ganda HOTS (C4–C6) Biologi Kelas XI
+     * Materi: Sistem Pencernaan Makanan pada Manusia & Ruminansia
+     * Setiap objek soal memiliki: id, topic, level, stimulus, question, options (5), correctAnswer (0-4), explanation
+     */
+    const QUIZ_QUESTIONS = [
+      // ==================== SUB-BAB 1: ZAT MAKANAN, UJI REAGEN & KEBUTUHAN ENERGI (1 - 9) ====================
+      {
+        id: 1,
+        topic: "Zat Makanan & Uji Reagen",
+        level: "C4 • Analisis",
+        stimulus: `Seorang ahli gizi menguji 5 ekstrak bahan makanan (P, Q, R, S, dan T) di laboratorium untuk menyusun diet pasien pasca-operasi bedah jaringan otot yang juga memiliki riwayat diabetes melitus tipe 2. Hasil uji biokimia disajikan pada tabel berikut:
+        <table class="stimulus-table">
+          <thead>
+            <tr><th>Bahan</th><th>Reagen Lugol</th><th>Reagen Biuret</th><th>Benedict + Panas</th><th>Kertas Buram</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>P</strong></td><td>Biru kehitaman</td><td>Biru muda</td><td>Merah bata</td><td>Tidak transparan</td></tr>
+            <tr><td><strong>Q</strong></td><td>Cokelat kekuningan</td><td>Ungu pekat</td><td>Biru bening</td><td>Tidak transparan</td></tr>
+            <tr><td><strong>R</strong></td><td>Biru kehitaman</td><td>Ungu muda</td><td>Hijau kekuningan</td><td>Transparan</td></tr>
+            <tr><td><strong>S</strong></td><td>Cokelat kekuningan</td><td>Biru muda</td><td>Oranye pekat</td><td>Transparan</td></tr>
+            <tr><td><strong>T</strong></td><td>Cokelat kekuningan</td><td>Ungu pekat</td><td>Merah bata</td><td>Transparan</td></tr>
+          </tbody>
+        </table>`,
+        question: "Berdasarkan analisis komposisi makronutrien dari hasil uji di atas, bahan makanan manakah yang paling tepat direkomendasikan sebagai menu utama pasien tersebut?",
+        options: [
+          "Bahan P, karena mengandung amilum dan glukosa tinggi sebagai sumber energi cepat penyembuhan luka.",
+          "Bahan Q, karena kaya protein untuk regenerasi sel jaringan tanpa menaikkan kadar gula darah secara drastis.",
+          "Bahan R, karena mengandung kombinasi seimbang antara amilum, lemak, dan sedikit glukosa.",
+          "Bahan S, karena gula pereduksi dan lipidnya mudah dioksidasi menjadi ATP tanpa membebani ginjal.",
+          "Bahan T, karena memiliki kandungan protein, lemak, dan glukosa yang paling lengkap untuk pemulihan."
+        ],
+        correctAnswer: 1,
+        explanation: "Pasien pasca-operasi membutuhkan protein tinggi untuk sintesis jaringan baru (uji Biuret positif ungu pekat), namun karena menderita diabetes melitus tipe 2, asupan gula sederhana (Benedict merah bata/oranye) dan karbohidrat berlebih harus dibatasi. Bahan Q positif Biuret (ungu pekat) dan negatif gula pereduksi serta lemak."
+      },
+      {
+        id: 2,
+        topic: "Zat Makanan & Metabolisme Energi",
+        level: "C5 • Evaluasi",
+        stimulus: `Dua orang pelari jarak jauh (Pelari X dan Pelari Y) mengikuti simulasi maraton 42 km. Pelari X menjalani pola makan tinggi karbohidrat kompleks (<em>carbohydrate loading</em>) selama 3 hari sebelum lomba, sedangkan Pelari Y menjalani diet ketogenik ketat (75% lemak, 20% protein, 5% karbohidrat) selama 2 minggu. Pada kilometer ke-32, Pelari Y mengalami kelelahan otot ekstrem disertai peningkatan frekuensi napas (hiperventilasi) dan pusing.`,
+        question: "Evaluasi fisiologis yang paling akurat untuk menjelaskan penurunan performa Pelari Y dibandingkan Pelari X pada fase akhir lomba adalah...",
+        options: [
+          "Oksidasi asam lemak menghasilkan lebih sedikit ATP per gram dibandingkan glikogen sehingga cadangan energi Pelari Y lebih cepat habis.",
+          "Oksidasi asam lemak membutuhkan lebih banyak molekul O₂ per ATP yang dihasilkan dibandingkan glukosa, serta memicu akumulasi badan keton yang menurunkan pH darah.",
+          "Diet ketogenik menghambat sekresi enzim lipase pankreas sehingga trigliserida jaringan adiposa tidak dapat dihidrolisis menjadi asam lemak bebas.",
+          "Pelari X mengalami fermentasi asam laktat lebih lambat karena amilum langsung diserap ke dalam mitokondria tanpa melalui glikolisis.",
+          "Protein pada diet Pelari Y langsung diubah menjadi urea di otot rangka sehingga menghambat ikatan aktin dan miosin."
+        ],
+        correctAnswer: 1,
+        explanation: "Meskipun lemak menghasilkan ~9,3 kkal/gram, oksidasi beta asam lemak memerlukan lebih banyak oksigen per molekul ATP dibandingkan oksidasi glukosa (efisiensi oksigen lebih rendah). Pada intensitas tinggi saat suplai O₂ terbatas, ketergantungan pada lemak memicu ketogenesis berlebih (ketoasidosis ringan) yang menurunkan pH darah dan memicu hiperventilasi kompensasi."
+      },
+      {
+        id: 3,
+        topic: "Perhitungan BMR & Keseimbangan Kalori",
+        level: "C4 • Analisis",
+        stimulus: `Raka adalah siswa kelas XI berusia 17 tahun dengan berat badan 70 kg dan tinggi badan 170 cm. Ia menghitung Angka Metabolisme Basal (BMR) menggunakan persamaan Mifflin-St Jeor untuk laki-laki:
+        <div class="bg-white p-3 rounded-xl border border-slate-200 font-mono text-xs my-2">BMR = (10 × BB<sub>kg</sub>) + (6,25 × TB<sub>cm</sub>) − (5 × Usia) + 5</div>
+        Karena Raka rutin berlatih basket 4 kali seminggu, faktor aktivitas fisiknya adalah <strong>1,55</strong>. Dalam sehari, Raka mengonsumsi total 300 gram karbohidrat, 90 gram protein, dan 60 gram lemak (nilai Atwater: karbohidrat = 4 kkal/g, protein = 4 kkal/g, lemak = 9 kkal/g).`,
+        question: "Berdasarkan perhitungan kebutuhan energi harian (TDEE) dan total asupan kalorinya, kesimpulan manakah yang paling tepat mengenai status keseimbangan energi Raka?",
+        options: [
+          "Raka mengalami surplus energi sekitar +515 kkal/hari sehingga berpotensi mengalami peningkatan massa tubuh.",
+          "Raka mengalami defisit energi sekitar −515 kkal/hari karena total asupan makanannya hanya 2.100 kkal sementara TDEE-nya mencapai 2.615 kkal.",
+          "Raka berada dalam keseimbangan energi netral karena BMR-nya sebesar 1.682,5 kkal sama dengan total kalori makronutriennya.",
+          "Raka mengalami defisit energi sekitar −380 kkal/hari sehingga tubuhnya akan memecah glikogen hati secara terus-menerus.",
+          "Raka mengalami surplus energi sekitar +417 kkal/hari karena kontribusi kalori dari lemak melebihi 50% kebutuhan harian."
+        ],
+        correctAnswer: 1,
+        explanation: "BMR = (10 × 70) + (6,25 × 170) − (5 × 17) + 5 = 700 + 1062,5 − 85 + 5 = 1682,5 kkal. TDEE = 1682,5 × 1,55 = 2607,88 kkal (~2.608 kkal). Sementara total asupan kalori = (300 × 4) + (90 × 4) + (60 × 9) = 1200 + 360 + 540 = 2.100 kkal. Jadi Raka mengalami defisit sekitar 508–515 kkal/hari."
+      },
+      {
+        id: 4,
+        topic: "Defisiensi Mikronutrien & Kofaktor",
+        level: "C4 • Analisis",
+        stimulus: `Di sebuah daerah yang penduduknya hanya mengonsumsi jagung tanpa proses nikstamalisasi (perendaman dalam air kapur) sebagai makanan pokok tunggal dan sangat minim asupan protein hewani, ditemukan banyak kasus warga dengan gejala khas berupa ruam kulit bersisik simetris pada area yang terkena sinar matahari, diare kronis, serta gangguan memori (penyakit <em>Pellagra</em>).`,
+        question: "Analisis biokimia yang mendasari munculnya gangguan metabolisme seluler pada kasus tersebut adalah...",
+        options: [
+          "Jagung mengandung antivitamin yang merusak retinol (vitamin A) sehingga regenerasi epitel kulit dan mukosa usus terhenti.",
+          "Defisiensi vitamin B3 (niasin) dan asam amino esensial triptofan menghambat sintesis koenzim NAD⁺ dan NADP⁺ yang krusial dalam reaksi redoks respirasi sel.",
+          "Kekurangan vitamin B12 (kobalamin) menyebabkan kegagalan sintesis selubung mielin dan pematangan eritrosit di sumsum tulang.",
+          "Absorpsi kalsium terhambat akibat tingginya asam fitat pada jagung sehingga terjadi demineralisasi tulang dan gangguan impuls saraf.",
+          "Defisiensi vitamin C menghambat hidroksilasi prolin dalam pembentukan kolagen sehingga kapiler kulit dan usus mudah pecah."
+        ],
+        correctAnswer: 1,
+        explanation: "Pellagra (3D: Dermatitis, Diarrhea, Dementia) disebabkan oleh defisiensi niasin (vitamin B3) dan asam amino triptofan (prekursor niasin). Pada jagung yang tidak diolah dengan larutan basa, niasin terikat kuat (niasitin) sehingga tidak dapat diserap, dan jagung miskin triptofan. Niasin diperlukan untuk membentuk NAD⁺ dan NADP⁺."
+      },
+      {
+        id: 5,
+        topic: "Evaluasi Indeks Massa Tubuh (BMI)",
+        level: "C5 • Evaluasi",
+        stimulus: `Perhatikan data klinis dua individu dewasa berusia 25 tahun berikut ini:
+        <table class="stimulus-table">
+          <thead>
+            <tr><th>Parameter</th><th>Individu A (Atlet Angkat Besi)</th><th>Individu B (Pekerja Kantoran)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Tinggi Badan / Berat Badan</td><td>175 cm / 83 kg</td><td>175 cm / 83 kg</td></tr>
+            <tr><td>Indeks Massa Tubuh (BMI)</td><td>27,1 kg/m² (Kategori <em>Overweight</em>)</td><td>27,1 kg/m² (Kategori <em>Overweight</em>)</td></tr>
+            <tr><td>Persentase Lemak Tubuh</td><td>10,5%</td><td>33,8%</td></tr>
+            <tr><td>Lingkar Pinggang</td><td>79 cm</td><td>102 cm</td></tr>
+          </tbody>
+        </table>`,
+        question: "Berdasarkan data tersebut, evaluasi kritis manakah yang paling tepat mengenai penggunaan indikator BMI dalam menilai status kesehatan gizi?",
+        options: [
+          "Individu A dan B memiliki risiko resistensi insulin dan penyakit kardiovaskular yang identik karena nilai BMI keduanya berada di atas 25 kg/m².",
+          "BMI tidak mampu membedakan massa otot rangka yang padat dengan massa jaringan adiposa viseral, sehingga pengukuran lingkar pinggang dan komposisi lemak tubuh wajib menyertainya.",
+          "Individu A mengalami obesitas sentral akibat hipertrofi sel adiposit di rongga peritoneum yang menekan organ pencernaan.",
+          "Nilai BMI Individu B seharusnya dikoreksi dengan mengalikan tinggi badan dengan faktor aktivitas harian sebelum dikategorikan.",
+          "Individu A disarankan melakukan diet defisit kalori ekstrem untuk menurunkan BMI ke rentang 18,5–22,9 kg/m² demi mencegah sindrom metabolik."
+        ],
+        correctAnswer: 1,
+        explanation: "BMI hanya menghitung rasio berat badan total terhadap kuadrat tinggi badan tanpa membedakan komposisi jaringan otot (densitas tinggi) dan lemak. Individu A memiliki massa otot tinggi (lemak 10,5%), sedangkan Individu B memiliki lemak viseral tinggi (lingkar pinggang 102 cm) yang memicu resistensi insulin dan sindrom metabolik."
+      },
+      {
+        id: 6,
+        topic: "Struktur & Absorpsi Lipid",
+        level: "C4 • Analisis",
+        stimulus: `Seorang pasien baru saja menjalani operasi pengangkatan kantung empedu (<em>kolesistektomi</em>) akibat penyumbatan batu empedu kronis. Dokter spesialis gizi menyarankan pasien tersebut untuk mengganti penggunaan minyak kelapa sawit/mentega yang kaya trigliserida rantai panjang (LCT, >12 atom karbon) dengan minyak kelapa murni yang kaya trigliserida rantai sedang (MCT, 6–10 atom karbon) dalam jumlah terukur.`,
+        question: "Alasan fisiologis yang mendasari rekomendasi penggantian LCT menjadi MCT pada pasien tanpa kantung empedu adalah...",
+        options: [
+          "MCT tidak memerlukan hidrolisis oleh enzim lipase maupun emulsifikasi garam empedu, sehingga dapat langsung diserap ke pembuluh lakteal.",
+          "MCT jauh lebih mudah diemulsikan dalam konsentrasi garam empedu yang encer dan asam lemaknya dapat langsung diserap masuk ke kapiler darah vena porta hepatika tanpa membentuk kilomikron.",
+          "MCT merangsang sel-sel duktus koledokus untuk membentuk kantung empedu sekunder dalam waktu singkat.",
+          "LCT bersifat toksik terhadap sel epitel usus halus apabila tidak terikat terlebih dahulu dengan hormon kolesistokinin.",
+          "MCT memiliki titik didih lebih rendah sehingga langsung menguap dan berdifusi menembus membran mukosa lambung."
+        ],
+        correctAnswer: 1,
+        explanation: "Tanpa kantung empedu, empedu dari hati mengalir langsung ke duodenum dalam konsentrasi yang lebih encer (tidak terkonsentrasi). MCT lebih larut air sehingga tidak bergantung penuh pada misel garam empedu yang pekat, dan asam lemak rantai sedang langsung masuk ke kapiler darah vena porta menuju hati tanpa perlu dikemas menjadi kilomikron di lakteal."
+      },
+      {
+        id: 7,
+        topic: "Perancangan Terapi Gizi Klinis",
+        level: "C6 • Mencipta",
+        stimulus: `Seorang siswi kelas XI mengalami anemia defisiensi besi (kadar Hb 9,2 g/dL) dengan pola makan vegetarian (hanya mengonsumsi sumber zat besi non-heme dari bayam, kacang merah, dan tahu). Kebiasaannya adalah selalu minum teh manis hangat segera setelah makan siang.`,
+        question: "Rancangan modifikasi menu dan kebiasaan makan manakah yang paling efektif meningkatkan bioavailabilitas zat besi non-heme ($Fe^{3+}$) di usus halus siswi tersebut?",
+        options: [
+          "Menambahkan suplemen kalsium dosis tinggi bersama bayam agar membentuk kompleks kelat yang mudah ditranspor oleh enterosit.",
+          "Mengganti teh setelah makan dengan jus jeruk/jambu biji kaya asam askorbat untuk mereduksi $Fe^{3+}$ menjadi $Fe^{2+}$ yang larut, serta memberi jeda 2 jam untuk konsumsi teh agar tidak terikat polifenol/tanin.",
+          "Merebus sayuran hijau lebih dari 45 menit agar dinding selulosa hancur sempurna dan melepaskan hemoglobin nabati.",
+          "Mengonsumsi antasida sebelum makan untuk menetralkan asam lambung sehingga $Fe^{3+}$ tidak teroksidasi di duodenum.",
+          "Menambahkan susu sapi murni ke dalam menu kacang merah karena kasein mempercepat difusi fasilitasi besi di ileum."
+        ],
+        correctAnswer: 1,
+        explanation: "Zat besi non-heme dari tumbuhan umumnya berbentuk feri ($Fe^{3+}$) yang sukar diserap. Asam askorbat (vitamin C) mereduksi $Fe^{3+}$ menjadi fero ($Fe^{2+}$) yang larut dan membentuk kompleks yang mudah diserap oleh transporter DMT1 di duodenum. Sebaliknya, tanin/polifenol dalam teh dan kalsium tinggi menghambat absorpsi besi."
+      },
+      {
+        id: 8,
+        topic: "Analisis Eksperimen Uji Enzim & Reagen",
+        level: "C4 • Analisis",
+        stimulus: `Dalam praktikum biologi, kelompok siswa memasukkan 5 mL larutan albumin (putih telur) ke dalam Tabung A dan Tabung B. Tabung A ditambahkan 2 mL ekstrak pepsin + 1 mL HCl 0,1 M, sedangkan Tabung B ditambahkan 2 mL akuades + 1 mL HCl 0,1 M. Kedua tabung diinkubasi pada suhu 37°C selama 45 menit, lalu masing-masing ditetesi reagen Biuret. Hasil pengamatan menunjukkan Tabung B berwarna <strong>ungu tua</strong>, sedangkan Tabung A berwarna <strong>merah muda keunguan (pink-violet)</strong>, bukan biru bening.`,
+        question: "Interpretasi biokimia yang paling tepat mengapa Tabung A tidak berubah menjadi warna biru bening setelah dicerna pepsin adalah...",
+        options: [
+          "Enzim pepsin mengalami denaturasi akibat penambahan HCl 0,1 M sehingga albumin tetap utuh sebagai polipeptida panjang.",
+          "Pepsin hanya menghidrolisis ikatan peptida tertentu menjadi pepton dan polipeptida rantai pendek yang masih memiliki lebih dari dua ikatan peptida, sehingga tetap bereaksi dengan ion $Cu^{2+}$ Biuret.",
+          "Reagen Biuret bereaksi positif dengan asam amino bebas hasil pemecahan sempurna protein oleh pepsin.",
+          "Suhu 37°C berada di bawah suhu optimum pepsin sehingga laju hidrolisis berjalan sangat lambat.",
+          "Ion klorida dari HCl mengikat reagen Biuret membentuk kompleks berwarna merah muda."
+        ],
+        correctAnswer: 1,
+        explanation: "Pepsin adalah endopeptidase yang memecah protein besar (albumin) menjadi polipeptida rantai lebih pendek (proteosa dan pepton), bukan menjadi asam amino tunggal. Karena pepton masih memiliki ikatan peptida, uji Biuret tetap memberikan warna merah muda keunguan (khas polipeptida rantai pendek), berbeda dengan warna biru (negatif ikatan peptida)."
+      },
+      {
+        id: 9,
+        topic: "Evaluasi Peran Serat Pangan",
+        level: "C5 • Evaluasi",
+        stimulus: `Serat pangan dibedakan menjadi serat larut air (<em>soluble fiber</em> seperti pektin dan beta-glukan pada oat/apel) dan serat tidak larut air (<em>insoluble fiber</em> seperti selulosa dan lignin pada gandum utuh/sayuran). Seorang pasien dislipidemia (kolesterol LDL tinggi) dan pradiabetes dianjurkan meningkatkan konsumsi serat larut air.`,
+        question: "Evaluasi mekanisme fisiologis yang menjelaskan bagaimana serat larut air mampu menurunkan kadar kolesterol LDL sekaligus meredam lonjakan glukosa darah setelah makan adalah...",
+        options: [
+          "Serat larut air dihidrolisis oleh enzim selulase pankreas menjadi asam lemak rantai pendek yang menghambat sintesis glikogen.",
+          "Serat larut air membentuk gel kental di saluran cerna yang memperlambat difusi glukosa ke enterosit serta mengikat asam empedu untuk dibuang bersama feses sehingga hati menarik kolesterol LDL darah untuk membuat empedu baru.",
+          "Serat larut air merangsang sekresi hormon gastrin secara masif untuk mempercepat pengosongan kimus dari lambung ke kolon.",
+          "Serat larut air melapisi seluruh permukaan vilus secara permanen sehingga trigliserida tidak pernah dapat dicerna oleh lipase.",
+          "Serat larut air mengubah glukosa menjadi selulosa di dalam duodenum melalui reaksi polimerisasi enzimatik."
+        ],
+        correctAnswer: 1,
+        explanation: "Serat larut air menyerap air membentuk gel viskos yang memperlambat pengosongan lambung dan difusi glukosa ke permukaan absorptif usus (menurunkan indeks glikemik). Selain itu, gel ini menjerat misel asam empedu agar diekskresikan lewat feses, memaksa hepatosit mengambil kolesterol LDL dari darah untuk mensintesis asam empedu pengganti."
+      },
+
+      // ==================== SUB-BAB 2: STRUKTUR & FUNGSI ORGAN & KELENJAR PENCERNAAN (10 - 17) ====================
+      {
+        id: 10,
+        topic: "Histologi & Fisiologi Lambung",
+        level: "C4 • Analisis",
+        stimulus: `Pada penyakit <em>gastritis atrofi autoimun</em>, sistem imun tubuh menghasilkan antibodi yang merusak <strong>sel parietal (oksintik)</strong> pada kelenjar fundus dan korpus lambung secara progresif. Pasien tidak hanya mengalami gangguan pencernaan protein, tetapi beberapa bulan kemudian juga didiagnosis menderita anemia megaloblastik (pernisiosa).`,
+        question: "Rangkaian mekanisme patofisiologis yang menghubungkan kerusakan sel parietal lambung dengan munculnya anemia pernisiosa adalah...",
+        options: [
+          "Sel parietal gagal mensekresi pepsinogen sehingga hemoglobin dari daging merah tidak dapat dipecah menjadi zat besi heme.",
+          "Sel parietal gagal mensekresi faktor intrinsik (<em>intrinsic factor</em>) yang mutlak diperlukan untuk melindungi dan memfasilitasi absorpsi vitamin B12 di ileum terminal.",
+          "Sel parietal gagal mensekresi hormon gastrin sehingga sumsum tulang merah kekurangan rangsangan eritropoiesis.",
+          "Kerusakan sel parietal menyebabkan pH lambung turun di bawah 1,0 sehingga merusak eritrosit yang melewati kapiler submukosa.",
+          "Sel parietal gagal mensekresi mukus bikarbonat sehingga terjadi perdarahan masif terus-menerus pada esofagus."
+        ],
+        correctAnswer: 1,
+        explanation: "Sel parietal lambung memiliki dua fungsi sekresi vital: (1) mensekresi HCl untuk menurunkan pH dan mengaktifkan pepsinogen, serta (2) mensekresi glikoprotein 'Faktor Intrinsik' yang berikatan dengan vitamin B12 agar dapat dikenali reseptor khusus di ileum terminal. Tanpa B12, pematangan sel darah merah terganggu (anemia pernisiosa)."
+      },
+      {
+        id: 11,
+        topic: "Struktur Vili & Transportasi Nutrien",
+        level: "C4 • Analisis",
+        stimulus: `Perhatikan skema penampang vilus usus halus berikut ini:
+        <div class="bg-white p-3 rounded-xl border border-slate-200 my-2 flex justify-center">
+          <svg class="w-full max-w-md h-40" viewBox="0 0 360 150">
+            <!-- Villus Outline -->
+            <path d="M40,140 L40,55 C40,15 110,15 110,55 L110,140" fill="#ecfdf5" stroke="#059669" stroke-width="2.5"/>
+            <!-- Lacteal (Central Lymphatic Vessel) -->
+            <path d="M70,140 L70,45 C70,38 80,38 80,45 L80,140" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+            <!-- Blood Capillaries -->
+            <path d="M52,140 L52,55 C52,28 98,28 98,55 L98,140" fill="none" stroke="#dc2626" stroke-width="1.8" stroke-dasharray="4,2"/>
+            <!-- Labels -->
+            <line x1="80" y1="55" x2="145" y2="35" stroke="#475569" stroke-width="1.2"/>
+            <text x="150" y="38" font-size="11" font-weight="bold" fill="#92400e">Pembuluh X (Lakteal Sentral)</text>
+            <line x1="98" y1="75" x2="145" y2="75" stroke="#475569" stroke-width="1.2"/>
+            <text x="150" y="78" font-size="11" font-weight="bold" fill="#991b1b">Jaringan Y (Kapiler Darah)</text>
+            <line x1="110" y1="110" x2="145" y2="112" stroke="#475569" stroke-width="1.2"/>
+            <text x="150" y="115" font-size="11" font-weight="bold" fill="#065f46">Epitel Z (Enterosit + Mikrovili)</text>
+          </svg>
+        </div>`,
+        question: "Mengapa molekul trigliserida hasil resintesis di dalam Epitel Z (dalam bentuk kilomikron) diarahkan masuk ke Pembuluh X dan bukan langsung ke Jaringan Y?",
+        options: [
+          "Kilomikron memiliki ukuran makromolekul yang terlalu besar untuk menembus celah endotel kapiler darah (Jaringan Y), sedangkan endotel Pembuluh X memiliki celah interseluler besar.",
+          "Jaringan Y memiliki tekanan hidrostatik yang terlalu rendah untuk mengangkut molekul lemak menuju vena porta hepatika.",
+          "Pembuluh X mengandung enzim lipase limfatik yang akan memecah kilomikron menjadi glukosa sebelum masuk ke jantung.",
+          "Kapiler darah pada Jaringan Y tidak memiliki reseptor protein transmembran untuk mengikat vitamin A, D, E, dan K.",
+          "Kilomikron bersifat hidrofilik murni sehingga akan menggumpal jika bersentuhan langsung dengan plasma darah di Jaringan Y."
+        ],
+        correctAnswer: 0,
+        explanation: "Di dalam enterosit (Epitel Z), asam lemak rantai panjang dan monogliserida diesterifikasi ulang menjadi trigliserida, lalu dikemas bersama kolesterol, fosfolipid, dan apolipoprotein menjadi lipoprotein besar bernama kilomikron (~100–500 nm). Ukurannya terlalu besar untuk menembus kapiler darah, sehingga masuk melalui celah endotel pembuluh lakteal (limfa) menuju duktus torasikus."
+      },
+      {
+        id: 12,
+        topic: "Fungsi Sfingter Saluran Pencernaan",
+        level: "C5 • Evaluasi",
+        stimulus: `Sfingter Oddi adalah katup otot polos yang mengatur aliran sekresi gabungan dari duktus koledokus (empedu) dan duktus pankreatikus mayor (getah pankreas) menuju duodenum pars desendens. Pada kondisi klinis tertentu, pemberian obat analgesik opioid dosis tinggi dapat memicu spasme (kontraksi berkepanjangan) pada sfingter Oddi.`,
+        question: "Evaluasi komplikasi akut yang paling berisiko terjadi apabila sfingter Oddi mengalami spasme persisten setelah pasien mengonsumsi makanan berlemak tinggi adalah...",
+        options: [
+          "Aliran balik (refluks) getah pankreas dan empedu yang meningkatkan tekanan intraduktal sehingga memicu aktivasi dini tripsinogen di dalam pankreas (pankreatitis akut).",
+          "Penurunan drastis kadar bilirubin darah akibat percepatan ekskresi garam empedu ke dalam kolon asendens.",
+          "Peningkatan pH lambung menjadi sangat basa akibat refluks bikarbonat melalui sfingter pilorus yang terbuka.",
+          "Hipersalivasi kronis sebagai kompensasi hilangnya enzim amilase di dalam rongga mulut.",
+          "Penghentian total gerakan peristaltik esofagus akibat terputusnya impuls nervus vagus."
+        ],
+        correctAnswer: 0,
+        explanation: "Ketika makanan berlemak masuk ke duodenum, hormon CCK merangsang sekresi enzim pankreas dan kontraksi kantung empedu. Jika sfingter Oddi menutup rapat akibat spasme, tekanan di saluran pankreas melonjak tajam dan memicu aktivasi dini zimogen (seperti tripsinogen menjadi tripsin) di dalam jaringan pankreas sendiri, menyebabkan autodigesti (pankreatitis akut)."
+      },
+      {
+        id: 13,
+        topic: "Sirkulasi Enterohepatik & Ileum",
+        level: "C4 • Analisis",
+        stimulus: `Dalam siklus fisiologis normal, hati mensintesis sekitar 0,5 gram garam empedu baru per hari dari kolesterol, sementara total garam empedu yang disekresikan ke duodenum mencapai 20–30 gram per hari. Efisiensi ini dimungkinkan oleh <strong>sirkulasi enterohepatik</strong>, di mana 95% garam empedu direabsorpsi secara aktif di <strong>ileum terminal</strong>. Seorang pasien penyakit Crohn harus menjalani reseksi (pemotongan) 80 cm bagian ileum terminalnya.`,
+        question: "Dampak jangka panjang yang paling logis terjadi pada pasien pasca-reseksi ileum terminal tersebut adalah...",
+        options: [
+          "Terjadi akumulasi garam empedu di vena porta sehingga hepatosit menghentikan seluruh sintesis kolesterol endogen.",
+          "Garam empedu lolos masuk ke kolon dalam jumlah besar memicu diare, sementara hati gagal mengimbangi kehilangan garam empedu sehingga terjadi malabsorpsi lemak (steatorea).",
+          "Pencernaan karbohidrat oleh ptialin dan amilase pankreas terhenti total karena kehilangan kofaktor garam empedu.",
+          "Kantung empedu mengalami hipertrofi dan memproduksi enzim lipase sendiri untuk menggantikan fungsi ileum.",
+          "Penyerapan air di lambung meningkat tajam sehingga pasien mengalami konstipasi berat."
+        ],
+        correctAnswer: 1,
+        explanation: "Karena 95% reabsorpsi garam empedu terjadi di ileum terminal, pemotongan bagian ini memutus sirkulasi enterohepatik. Garam empedu masuk ke kolon merangsang sekresi air/elektrolit (diare kolereik), dan kecepatan sintesis baru di hati tidak cukup menutupi kehilangan tersebut sehingga konsentrasi misel di duodenum turun dan lemak gagal diserap (steatorea)."
+      },
+      {
+        id: 14,
+        topic: "Regulasi Sekresi Kelenjar Saliva",
+        level: "C4 • Analisis",
+        stimulus: `Saat seorang siswa diminta maju presentasi mendadak di depan kelas, ia merasakan mulutnya menjadi sangat kering (<em>xerostomia</em>) dan sulit menelan, meskipun 10 menit sebelumnya saat melihat makanan enak di kantin mulutnya terasa penuh air liur.`,
+        question: "Analisis neurofisiologis yang menjelaskan perbedaan sekresi kelenjar ludah pada dua situasi tersebut adalah...",
+        options: [
+          "Rangsangan saraf simpatis saat stres memicu vasokonstriksi pembuluh darah kelenjar saliva dan menghasilkan sedikit saliva kental kaya musin, sedangkan saraf parasimpatis merangsang sekresi saliva encer bervolume besar.",
+          "Saraf simpatis menghambat seluruh sintesis enzim amilase oleh kelenjar sublingualis namun meningkatkan sekresi kelenjar parotis.",
+          "Kondisi cemas meningkatkan hormon gastrin yang menarik cairan dari rongga mulut menuju lumen lambung.",
+          "Rangsangan parasimpatis menutup duktus Stensen pada kelenjar parotis sehingga saliva tertahan di dalam asinus.",
+          "Pada saat stres, epitel rongga mulut menyerap kembali seluruh ion natrium dan air dari saliva secara osmosis."
+        ],
+        correctAnswer: 0,
+        explanation: "Kelenjar saliva unik karena baik saraf parasimpatis maupun simpatis merangsang sekresi, namun dengan profil berbeda. Parasimpatis (saat melihat/mencium makanan) merangsang sekresi saliva serosa (encer, kaya air, elektrolit, dan ptialin) dalam volume besar. Simpatis (saat cemas/stres) menyebabkan vasokonstriksi dan hanya mensekresi sedikit saliva mukosa yang kental sehingga mulut terasa kering."
+      },
+      {
+        id: 15,
+        topic: "Peran Kolon & Mikrobiota Usus",
+        level: "C5 • Evaluasi",
+        stimulus: `Seorang pasien lansia dirawat di rumah sakit dan mendapatkan terapi antibiotik spektrum luas dosis tinggi selama 14 hari. Pada hari ke-12, pasien mengalami diare cair berbau khas disertai demam dan nyeri perut, serta ditemukan penurunan waktu pembekuan darah (pemanjangan PT/INR).`,
+        question: "Evaluasi komprehensif mengenai hubungan antara terapi antibiotik spektrum luas dengan dua gejala klinis pasien tersebut adalah...",
+        options: [
+          "Antibiotik merusak vili duodenum secara langsung sehingga absorpsi air dan sintesis trombosit di usus halus terhenti.",
+          "Antibiotik memusnahkan bakteri komensal kolon sehingga memicu proliferasi bakteri patogen oportunistik (<em>Clostridioides difficile</em>) serta menghentikan sintesis vitamin K2 oleh mikrobiota usus.",
+          "Antibiotik menetralkan asam lambung sehingga bakteri <em>Helicobacter pylori</em> berpindah ke kolon dan menghancurkan faktor pembekuan darah.",
+          "Antibiotik meningkatkan motilitas kolon secara langsung dengan berikatan pada reseptor asetilkolin otot polos usus.",
+          "Musnahnya bakteri kolon menyebabkan selulosa tercerna terlalu cepat menjadi glukosa sehingga menarik air secara osmosis."
+        ],
+        correctAnswer: 1,
+        explanation: "Mikrobiota normal kolon berperan penting dalam (1) resistensi kolonisasi untuk menekan pertumbuhan bakteri patogen seperti <em>Clostridioides difficile</em> penyebab kolitis pseudomembran, dan (2) mensintesis vitamin K2 (menakuinon) yang dibutuhkan hati untuk mengaktifkan faktor pembekuan darah II, VII, IX, dan X."
+      },
+      {
+        id: 16,
+        topic: "Anatomi & Fisiologi Pankreas Eksokrin",
+        level: "C4 • Analisis",
+        stimulus: `Pada penyakit genetik <em>Cystic Fibrosis</em> (CF), terjadi mutasi pada gen penyandi kanal ion klorida <strong>CFTR</strong> yang banyak terdapat pada membran apikal <strong>sel duktal pankreas</strong>. Akibatnya, sekresi cairan kaya ion bikarbonat ($HCO_3^-$) dari pankreas menuju duodenum menjadi sangat kental dan tersumbat.`,
+        question: "Dampak langsung dari kegagalan sel duktal pankreas mensekresikan ion bikarbonat ($HCO_3^-$) terhadap proses pencernaan di duodenum adalah...",
+        options: [
+          "Kimus asam dari lambung gagal dinetralkan sehingga lingkungan duodenum tetap ber-pH rendah dan seluruh enzim pankreas (amilase, lipase, tripsin) mengalami inaktivasi/denaturasi.",
+          "Sel-sel asinar pankreas berhenti mensintesis pepsinogen dan renin akibat peningkatan tekanan osmotik darah.",
+          "Kadar glukosa darah turun drastis karena sel duktal gagal mensekresikan hormon insulin dan glukagon.",
+          "Garam empedu berubah menjadi batu kolesterol seketika karena pH duodenum terlalu basa.",
+          "Enterokinase pada mikrovili usus bekerja terlalu cepat sehingga melubangi dinding duodenum."
+        ],
+        correctAnswer: 0,
+        explanation: "Pankreas eksokrin terdiri atas sel asinar (mensekresi enzim pencernaan) dan sel duktal (mensekresi larutan encer kaya $NaHCO_3$ untuk menetralkan HCl kimus dari lambung). Tanpa $HCO_3^-$, pH duodenum tetap sangat asam (<4), menyebabkan enzim-enzim pankreas yang bekerja optimal pada pH 7,5–8,5 menjadi tidak aktif."
+      },
+      {
+        id: 17,
+        topic: "Motilitas Saluran Pencernaan",
+        level: "C6 • Mencipta",
+        stimulus: `Saluran pencernaan memiliki dua pola kontraksi otot polos utama yang dikendalikan oleh sistem saraf enterik (pleksus Auerbach/mienterikus): <strong>peristalsis</strong> dan <strong>segmentasi</strong>. Pada penyakit <em>Akalasia</em>, terjadi degenerasi neuron inhibitorik pada pleksus mienterikus di esofagus bagian distal sehingga sfingter esofagus bawah gagal berelaksasi saat gelombang menelan tiba.`,
+        question: "Jika Anda merancang skema terapi farmakologis untuk meredakan gejala disfagia (sulit menelan) pada pasien Akalasia berdasarkan mekanisme kontrol saraf enterik, target kerja obat yang paling rasional adalah...",
+        options: [
+          "Agonis asetilkolin untuk meningkatkan tonus kontraksi otot sirkuler sfingter esofagus bawah.",
+          "Donor oksida nitrat (NO) atau penghambat kanal kalsium (<em>calcium channel blocker</em>) untuk memicu relaksasi otot polos sfingter esofagus bawah.",
+          "Inhibitor enzim amilase saliva agar bolus makanan tidak mengembang di dalam lumen esofagus.",
+          "Stimulan hormon gastrin dosis tinggi untuk mempercepat gelombang peristaltik retrograd dari lambung.",
+          "Antagonis reseptor dopamin untuk meningkatkan sekresi musin pada kelenjar parotis."
+        ],
+        correctAnswer: 1,
+        explanation: "Relaksasi sfingter esofagus bawah (LES) normalnya dimediasi oleh neurotransmiter inhibitorik seperti Oksida Nitrat (NO) dan VIP yang menurunkan ion $Ca^{2+}$ intraseluler otot polos. Pada akalasia, neuron penghasil NO rusak, sehingga terapi farmakologis menggunakan donor NO (nitrat) atau penghambat kanal $Ca^{2+}$ (nifedipin) untuk merelaksasi sfingter."
+      },
+
+      // ==================== SUB-BAB 3: MEKANISME PENCERNAAN & KINETIKA ENZIM (18 - 27) ====================
+      {
+        id: 18,
+        topic: "Analisis Grafik pH vs Aktivitas Enzim",
+        level: "C4 • Analisis",
+        stimulus: `Perhatikan grafik hubungan antara derajat keasaman (pH) terhadap laju reaksi relatif tiga enzim pencernaan manusia (Enzim I, Enzim II, dan Enzim III) berikut ini:
+        <div class="bg-white p-3 rounded-xl border border-slate-200 my-2 flex justify-center">
+          <svg class="w-full max-w-md h-44" viewBox="0 0 360 165">
+            <!-- Axes -->
+            <line x1="45" y1="135" x2="340" y2="135" stroke="#334155" stroke-width="2"/>
+            <line x1="45" y1="15" x2="45" y2="135" stroke="#334155" stroke-width="2"/>
+            <!-- X Axis Labels -->
+            <text x="42" y="150" font-size="10" fill="#475569">0</text>
+            <text x="90" y="150" font-size="10" fill="#475569">2</text>
+            <text x="140" y="150" font-size="10" fill="#475569">4</text>
+            <text x="190" y="150" font-size="10" fill="#475569">6</text>
+            <text x="215" y="150" font-size="10" fill="#475569">7</text>
+            <text x="245" y="150" font-size="10" fill="#475569">8</text>
+            <text x="295" y="150" font-size="10" fill="#475569">10</text>
+            <text x="175" y="162" font-size="11" font-weight="bold" fill="#0f172a">Derajat Keasaman (pH)</text>
+            <!-- Y Axis Label -->
+            <text x="14" y="95" font-size="10" font-weight="bold" fill="#0f172a" transform="rotate(-90 14,95)">Aktivitas Enzim</text>
+            <!-- Curve I (Pepsin - opt pH 2) -->
+            <path d="M55,134 Q95,15 135,134" fill="none" stroke="#dc2626" stroke-width="2.5"/>
+            <text x="82" y="25" font-size="10" font-weight="bold" fill="#dc2626">Enzim I</text>
+            <!-- Curve II (Ptialin - opt pH 6.8) -->
+            <path d="M145,134 Q210,15 265,134" fill="none" stroke="#059669" stroke-width="2.5"/>
+            <text x="195" y="25" font-size="10" font-weight="bold" fill="#059669">Enzim II</text>
+            <!-- Curve III (Tripsin - opt pH 8.2) -->
+            <path d="M185,134 Q250,15 325,134" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+            <text x="245" y="25" font-size="10" font-weight="bold" fill="#2563eb">Enzim III</text>
+          </svg>
+        </div>`,
+        question: "Ketika seseorang menelan bolus nasi yang telah dikunyah bercampur Enzim II memasuki bagian fundus lambung, bagaimanakah nasib aktivitas hidrolisis pati oleh Enzim II dalam 20–30 menit pertama sebelum gelombang peristaltik mencampur bolus dengan getah lambung?",
+        options: [
+          "Enzim II langsung terdenaturasi dalam hitungan detik saat melewati sfingter esofagus bawah karena suhu lambung lebih tinggi daripada rongga mulut.",
+          "Enzim II tetap aktif menghidrolisis amilum di bagian tengah bolus makanan karena bagian dalam bolus belum tersentuh HCl lambung hingga gelombang pencampuran antrum meratakannya.",
+          "Enzim II berubah konformasinya menjadi Enzim I sehingga mulai memecah ikatan peptida protein nasi.",
+          "Aktivitas Enzim II meningkat dua kali lipat karena pH 2,0 mengionisasi gugus karboksil pada sisi aktifnya.",
+          "Enzim II berikatan dengan musin lambung dan dibawa utuh menuju duodenum untuk bekerja bersama Enzim III."
+        ],
+        correctAnswer: 1,
+        explanation: "Enzim II adalah amilase saliva (ptialin) dengan pH optimum ~6,8. Ketika bolus makanan masuk ke bagian fundus/korpus lambung yang tonus ototnya lemah (relaksasi reseptif), getah lambung asam baru mengenai bagian luar bolus. Bagian inti bolus tetap ber-pH netral selama 20–30 menit sehingga ptialin terus memecah amilum hingga tercampur HCl."
+      },
+      {
+        id: 19,
+        topic: "Kaskade Aktivasi Zimogen Duodenum",
+        level: "C4 • Analisis",
+        stimulus: `Pada kasus kelainan genetik langka berupa defisiensi <strong>enterokinase (enteropeptidase)</strong> yang tertanam pada membran mikrovili duodenum, pankreas pasien tetap mampu mensintesis dan mensekresikan tripsinogen, kimotripsinogen, prokarboksipeptidase, amilase pankreas, dan lipase pankreas dalam jumlah normal.`,
+        question: "Berdasarkan kaskade aktivasi enzim di usus halus, dampak pencernaan makromolekul yang akan dialami pasien defisiensi enterokinase tersebut adalah...",
+        options: [
+          "Seluruh pencernaan karbohidrat, lemak, dan protein di usus halus terhenti total karena enterokinase mengaktifkan semua enzim pankreas secara langsung.",
+          "Pencernaan protein di usus halus mengalami kegagalan berat karena tripsinogen gagal diubah menjadi tripsin, yang berakibat kimotripsinogen dan prokarboksipeptidase juga tetap inaktif.",
+          "Pencernaan protein tetap berjalan normal karena pepsin dari lambung akan menggantikan peran enterokinase di duodenum.",
+          "Hanya pencernaan lemak yang terganggu karena enterokinase bertugas memecah trigliserida menjadi gliserol.",
+          "Terjadi autodigesti dinding duodenum akibat penumpukan tripsinogen aktif di dalam lumen."
+        ],
+        correctAnswer: 1,
+        explanation: "Enterokinase adalah enzim kunci (<em>master activator</em>) di brush border duodenum yang memotong ujung peptida tripsinogen menjadi tripsin aktif. Tripsin selanjutnya mengaktifkan tripsinogen lainnya (autokatalisis) serta mengaktifkan kimotripsinogen, prokarboksipeptidase, dan proelastase. Tanpa enterokinase, seluruh protease pankreas tetap dalam bentuk zimogen inaktif."
+      },
+      {
+        id: 20,
+        topic: "Evaluasi Eksperimen Pencernaan Lemak",
+        level: "C5 • Evaluasi",
+        stimulus: `Siswa melakukan eksperimen pencernaan lipid menggunakan 4 tabung reaksi yang masing-masing diisi 5 mL susu segar + 3 tetes indikator <strong>fenolftalein</strong> + 2 mL larutan $Na_2CO_3$ 0,05 M (sehingga seluruh tabung awalnya berwarna <strong>merah muda</strong> pada pH 8,5). Perlakuan tambahan pada suhu 37°C selama 30 menit dicatat sebagai berikut:
+        <table class="stimulus-table">
+          <thead>
+            <tr><th>Tabung</th><th>Bahan Tambahan</th><th>Warna Akhir (Menit ke-30)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td>2 mL ekstrak pankreas segar + 1 mL larutan garam empedu</td><td>Putih susu (merah muda hilang total dalam 8 menit)</td></tr>
+            <tr><td><strong>2</strong></td><td>2 mL ekstrak pankreas segar + 1 mL akuades</td><td>Merah muda sangat pucat (hilang pada menit ke-28)</td></tr>
+            <tr><td><strong>3</strong></td><td>2 mL ekstrak pankreas yang telah dididihkan + 1 mL garam empedu</td><td>Tetap merah muda pekat</td></tr>
+            <tr><td><strong>4</strong></td><td>2 mL akuades + 1 mL larutan garam empedu</td><td>Tetap merah muda pekat</td></tr>
+          </tbody>
+        </table>`,
+        question: "Evaluasi yang paling tepat terhadap perbandingan hasil antara Tabung 1, Tabung 2, dan Tabung 4 adalah...",
+        options: [
+          "Garam empedu merupakan enzim hidrolitik yang memecah trigliserida secara langsung menjadi asam lemak bebas seperti terlihat pada Tabung 4.",
+          "Garam empedu (Tabung 4) tidak menghidrolisis ikatan ester trigliserida, tetapi mengemulsikan globul lemak menjadi tetesan mikroskopis sehingga memperluas bidang sentuh bagi enzim lipase pankreas (Tabung 1 jauh lebih cepat dari Tabung 2).",
+          "Perubahan warna merah muda menjadi putih disebabkan oleh ion natrium dalam garam empedu yang menetralkan indikator fenolftalein.",
+          "Tabung 3 tetap berwarna merah muda karena pemanasan mengubah lemak susu menjadi protein kasein.",
+          "Lipase pankreas hanya dapat bekerja pada pH asam sehingga reaksi pada Tabung 2 berlangsung sangat lambat."
+        ],
+        correctAnswer: 1,
+        explanation: "Fenolftalein berwarna merah muda pada pH basa (>8,2) dan tidak berwarna pada pH <8,2. Hidrolisis trigliserida oleh lipase menghasilkan asam lemak bebas yang menurunkan pH larutan. Tabung 4 membuktikan garam empedu bukan enzim (tidak mengubah pH), namun perbandingannya dengan Tabung 1 dan 2 membuktikan emulsifikasi garam empedu mempercepat kerja lipase secara drastis."
+      },
+      {
+        id: 21,
+        topic: "Spesifisitas Enzim Karbohidrase",
+        level: "C4 • Analisis",
+        stimulus: `Molekul amilopektin pada pati memiliki rantai lurus glukosa dengan ikatan <strong>$\alpha$-1,4-glikosidik</strong> dan titik percabangan setiap 24–30 unit glukosa dengan ikatan <strong>$\alpha$-1,6-glikosidik</strong>. Enzim amilase saliva maupun amilase pankreas hanya mampu menghidrolisis ikatan $\alpha$-1,4-glikosidik bagian dalam, sehingga menyisakan fragmen oligosakarida bercabang yang disebut <strong>$\alpha$-dekstrin batas (<em>limit dextrin</em>)</strong>.`,
+        question: "Enzim spesifik pada membran mikrovili (<em>brush border</em>) usus halus yang bertanggung jawab menghidrolisis ikatan $\alpha$-1,6-glikosidik pada $\alpha$-dekstrin batas agar seluruhnya menjadi monomer glukosa bebas adalah...",
+        options: [
+          "Isomaltase ($\alpha$-dekstrinase)",
+          "Laktase ($\beta$-galaktosidase)",
+          "Sukrase (invertase)",
+          "Enteropeptidase",
+          "Fosfolipase A2"
+        ],
+        correctAnswer: 0,
+        explanation: "Enzim $\alpha$-dekstrinase (sering disebut juga isomaltase, yang membentuk kompleks dengan sukrase pada brush border enterosit) adalah satu-satunya enzim pencernaan manusia yang mampu memutus ikatan percabangan $\alpha$-1,6-glikosidik pada $\alpha$-dekstrin batas menjadi glukosa bebas."
+      },
+      {
+        id: 22,
+        topic: "Kinetika Suhu & Denaturasi Enzim",
+        level: "C4 • Analisis",
+        stimulus: `Dalam uji pengaruh suhu terhadap kerja amilase saliva, larutan pati + amilase diinkubasi selama 15 menit pada suhu berbeda: <strong>Tabung P (5°C)</strong>, <strong>Tabung Q (37°C)</strong>, dan <strong>Tabung R (80°C)</strong>. Hasil uji Lugol awal menunjukkan Tabung P dan R berwarna biru kehitaman, sedangkan Tabung Q berwarna kuning kecokelatan. Selanjutnya, Tabung P dan Tabung R dipindahkan ke penangas air bersuhu <strong>37°C</strong> selama 20 menit lalu diuji Lugol kembali. Ternyata Tabung P berubah menjadi kuning kecokelatan, sedangkan Tabung R tetap biru kehitaman.`,
+        question: "Penjelasan termodinamika dan struktur molekul yang mendasari perbedaan respons Tabung P dan Tabung R saat dikembalikan ke suhu 37°C adalah...",
+        options: [
+          "Pada suhu 5°C (Tabung P), energi kinetik molekul rendah sehingga tumbukan efektif enzim-substrat minimal tanpa merusak ikatan hidrogen/disulfida struktur tersier enzim; sedangkan suhu 80°C (Tabung R) memutus ikatan lemah penstabil konformasi sisi aktif secara ireversibel.",
+          "Suhu 5°C mengubah amilum menjadi glukosa secara spontan saat dipanaskan ke 37°C tanpa bantuan enzim amilase.",
+          "Pada suhu 80°C, ikatan kovalen peptida pada struktur primer amilase terputus seluruhnya menjadi asam amino bebas.",
+          "Amilum pada Tabung R mengalami karamelisasi pada suhu 80°C sehingga tidak lagi dapat dikenali oleh reagen Lugol.",
+          "Suhu dingin 5°C mengaktifkan koenzim ion klorida secara permanen sehingga reaksi berlangsung lebih cepat saat dihangatkan."
+        ],
+        correctAnswer: 0,
+        explanation: "Suhu rendah (5°C) hanya menurunkan energi kinetik molekul sehingga frekuensi tumbukan enzim dan substrat sangat rendah (inaktivasi sementara/reversibel). Ketika suhu dinaikkan ke 37°C, enzim kembali aktif. Sebaliknya, suhu 80°C memutus ikatan hidrogen, interaksi hidrofobik, dan ikatan ionik yang menjaga struktur tersier (sisi aktif) protein enzim sehingga terjadi denaturasi permanen."
+      },
+      {
+        id: 23,
+        topic: "Pencernaan Protein Susu pada Bayi",
+        level: "C5 • Evaluasi",
+        stimulus: `Lambung bayi mamalia, termasuk manusia pada masa menyusui, mengekspresikan enzim <strong>renin (kimosin)</strong> dalam jumlah tinggi. Enzim ini bekerja mengubah protein terlarut susu (kaseinogen/$\kappa$-kasein) menjadi parakasein yang kemudian berikatan dengan ion kalsium ($Ca^{2+}$) membentuk gumpalan dadih (<em>curd</em>) padat di dalam lambung.`,
+        question: "Evaluasi signifikansi fisiologis dari proses penggumpalan susu oleh enzim renin pada lambung bayi adalah...",
+        options: [
+          "Mencegah protein susu mengalir terlalu cepat melewati lambung menuju usus halus sehingga enzim pepsin memiliki waktu kontak yang cukup untuk menghidrolisis ikatan peptidanya.",
+          "Mengubah laktosa susu secara langsung menjadi galaktosa dan glukosa agar bayi tidak mengalami diare.",
+          "Menetralkan seluruh asam klorida lambung agar mukosa lambung bayi yang masih tipis tidak mengalami tukak.",
+          "Mengikat lemak susu agar tidak diserap oleh pembuluh lakteal usus halus.",
+          "Menggantikan fungsi hormon sekretin dalam merangsang kontraksi kantung empedu bayi."
+        ],
+        correctAnswer: 0,
+        explanation: "Karena makanan utama bayi berbentuk cair (ASI/susu), cairan cenderung melewati lambung menuju duodenum dengan sangat cepat. Renin mengkoagulasi kasein terlarut menjadi gumpalan dadih kalsium parakaseinat yang tertahan lebih lama di lambung, memberi waktu optimal bagi pepsin untuk mencerna protein susu."
+      },
+      {
+        id: 24,
+        topic: "Mekanisme Absorpsi Glukosa & Oralit",
+        level: "C4 • Analisis",
+        stimulus: `Penyerapan glukosa dan galaktosa dari lumen usus halus ke dalam sel epitel (enterosit) berlangsung melawan gradien konsentrasi melalui protein kotransporter <strong>SGLT1</strong> yang mengangkut 2 ion $Na^+$ bersama 1 molekul glukosa secara bersamaan. Gradien konsentrasi $Na^+$ rendah di dalam sitoplasma enterosit dipertahankan secara terus-menerus oleh pompa <strong>$Na^+/K^+$-ATPase</strong> pada membran basolateral.`,
+        question: "Berdasarkan mekanisme transpor membran tersebut, mengapa larutan oralit (campuran air, garam NaCl, dan glukosa dalam rasio molar seimbang) jauh lebih efektif menghentikan dehidrasi pada pasien diare dibandingkan meminum air putih murni dalam jumlah banyak?",
+        options: [
+          "Glukosa membunuh bakteri patogen di dalam lumen usus secara langsung melalui efek tekanan osmotik hipertonik.",
+          "Kotranspor SGLT1 membutuhkan kehadiran ion $Na^+$ dan glukosa secara bersamaan untuk masuk ke enterosit, yang selanjutnya menciptakan gradien osmotik untuk menarik air ($H_2O$) secara paraseluler dan melalui akuaporin masuk ke kapiler darah.",
+          "Pompa $Na^+/K^+$-ATPase pada membran apikal akan memompa air keluar dari sel enterosit menuju kapiler darah bila ada glukosa.",
+          "Air putih murni tidak dapat melewati membran fosfolipid bilayer enterosit tanpa terikat terlebih dahulu pada molekul sukrosa.",
+          "Garam NaCl menonaktifkan seluruh enzim pencernaan di duodenum sehingga sekresi cairan usus terhenti."
+        ],
+        correctAnswer: 1,
+        explanation: "Pada diare (misalnya kolera), sekresi ion $Cl^-$ dan air meningkat, tetapi mekanisme kotranspor SGLT1 ($Na^+$-glukosa) pada membran apikal enterosit tetap utuh! Ketika glukosa dan natrium diberikan bersamaan dalam oralit, SGLT1 aktif memompa keduanya masuk ke enterosit, menarik air mengikuti gradien osmotik ke dalam aliran darah."
+      },
+      {
+        id: 25,
+        topic: "Pencernaan Asam Nukleat",
+        level: "C4 • Analisis",
+        stimulus: `Setiap sel bahan makanan nabati maupun hewani mengandung molekul DNA dan RNA. Di dalam duodenum dan jejunum, asam nukleat mengalami pencernaan kimiawi bertahap sebelum komponen penyusunnya dapat diserap masuk ke kapiler darah vilus.`,
+        question: "Urutan kerja enzim dan produk hidrolisis asam nukleat yang benar di dalam usus halus adalah...",
+        options: [
+          "Nukleotidase pankreas memecah DNA menjadi asam amino → fosfatase memecahnya menjadi gliserol dan basa purin.",
+          "Ribonuklease dan deoksiribonuklease pankreas menghidrolisis RNA/DNA menjadi nukleotida → nukleotidase dan fosfatase <em>brush border</em> memecahnya menjadi nukleosida, gula pentosa, basa nitrogen, dan fosfat anorganik.",
+          "Amilase pankreas memutus ikatan fosfodiester DNA menjadi deoksiribosa → maltase menyerap basa nitrogen melalui difusi sederhana.",
+          "Enterokinase memecah kromatin inti sel makanan menjadi asam nukleat → tripsin mengubahnya menjadi urea.",
+          "Lipase pankreas melarutkan membran inti sel → pepsin menghidrolisis ikatan hidrogen antar basa nitrogen."
+        ],
+        correctAnswer: 1,
+        explanation: "Pencernaan asam nukleat dimulai di duodenum oleh enzim nuklease pankreas (ribonuklease dan deoksiribonuklease) yang memutus ikatan fosfodiester menghasilkan nukleotida. Selanjutnya, enzim brush border (nukleotidase dan fosfatase) memecah nukleotida menjadi basa nitrogen, gula pentosa, dan ion fosfat untuk diserap melalui transpor aktif."
+      },
+      {
+        id: 26,
+        topic: "Perancangan Eksperimen Inhibitor Enzim",
+        level: "C6 • Mencipta",
+        stimulus: `Seorang siswa ingin membuktikan hipotesis bahwa ion logam berat merkuri ($Hg^{2+}$) bertindak sebagai <strong>inhibitor non-kompetitif</strong> bagi enzim pepsin dalam mencerna kepingan fibrin (protein darah). Ia menyiapkan 4 tabung reaksi yang semuanya berisi 5 mL larutan pepsin 1% + 2 mL HCl 0,1 M + 0,5 gram kepingan fibrin pada suhu 37°C:
+        <br>• <strong>Tabung 1:</strong> Tanpa penambahan $HgCl_2$ (Kontrol positif)
+        <br>• <strong>Tabung 2:</strong> Ditambah 1 mL larutan $HgCl_2$ 0,05 M
+        <br>• <strong>Tabung 3:</strong> Ditambah 1 mL larutan $HgCl_2$ 0,05 M + kelebihan substrat fibrin (2,0 gram)`,
+        question: "Jika hipotesis siswa benar bahwa $Hg^{2+}$ adalah inhibitor non-kompetitif (bukan kompetitif), hasil pengamatan apa yang harus muncul pada Tabung 3 dibandingkan Tabung 2?",
+        options: [
+          "Penambahan substrat fibrin berlebih pada Tabung 3 akan memulihkan laju pencernaan fibrin hingga menyamai Tabung 1.",
+          "Penambahan substrat fibrin berlebih pada Tabung 3 tetap tidak mampu memulihkan laju reaksi enzimatik karena $Hg^{2+}$ berikatan pada gugus sulfhidril (-SH) di luar sisi aktif dan mengubah konformasi sisi aktif pepsin.",
+          "Tabung 3 akan menghasilkan warna ungu tua lebih cepat dibanding Tabung 1 karena fibrin berlebih mengikat ion $Hg^{2+}$.",
+          "Laju reaksi pada Tabung 2 dan Tabung 3 meningkat dua kali lipat karena ion $Hg^{2+}$ berperan sebagai kofaktor logam bagi pepsin.",
+          "Fibrin pada Tabung 1 tidak akan tercerna sama sekali karena tidak mengandung ion logam berat sebagai aktivator."
+        ],
+        correctAnswer: 1,
+        explanation: "Ciri utama inhibitor non-kompetitif (seperti ion logam berat $Hg^{2+}$ atau $Pb^{2+}$) adalah berikatan pada sisi alosterik/gugus -SH di luar sisi aktif dan merusak bentuk sisi aktif enzim. Oleh karena itu, penambahan konsentrasi substrat berlebih (Tabung 3) tidak dapat mengatasi hambatan enzim, berbeda dengan inhibitor kompetitif."
+      },
+      {
+        id: 27,
+        topic: "Evaluasi Mekanisme Proteksi Mukosa",
+        level: "C5 • Evaluasi",
+        stimulus: `Getah lambung manusia memiliki konsentrasi ion $H^+$ sekitar 3 juta kali lebih tinggi dibandingkan di dalam darah (pH 1,5–2,0) dan mengandung enzim proteolitik kuat (pepsin) yang mampu mencerna jaringan daging. Namun, dinding lambung yang juga tersusun atas jaringan protein tidak ikut tercerna dalam kondisi sehat.`,
+        question: "Evaluasi kombinasi mekanisme pertahanan berlapis (<em>gastric mucosal barrier</em>) yang mencegah terjadinya autodigesti pada dinding lambung adalah...",
+        options: [
+          "Sel epitel lambung dilapisi kitin tahan asam, enzim pepsin hanya bekerja pada protein nabati, dan aliran darah lambung sangat lambat.",
+          "Sekresi lapisan gel mukus tebal yang menjerat ion bikarbonat ($HCO_3^-$) sehingga pH tepat di permukaan epitel tetap netral (~7,0), adanya <em>tight junction</em> antar sel epitel, serta pepsin disekresikan dalam bentuk zimogen inaktif (pepsinogen).",
+          "Sel parietal memompa ion $OH^-$ secara terus-menerus ke dalam lumen lambung setiap kali makanan selesai dicerna.",
+          "Dinding lambung tidak memiliki ikatan peptida pada protein penyusun membran plasmanya.",
+          "Hormon sekretin melapisi seluruh permukaan fundus lambung dengan lapisan garam empedu pelindung."
+        ],
+        correctAnswer: 1,
+        explanation: "Sawar mukosa lambung bekerja melalui tiga pilar utama: (1) sel mukus leher mensekresi gel mukus kaya $HCO_3^-$ yang menciptakan gradien pH dari 2,0 di lumen menjadi ~7,0 tepat di membran apikal sel epitel; (2) taut ketat (<em>tight junction</em>) mencegah difusi balik ion $H^+$; dan (3) pepsin disekresikan sebagai pepsinogen inaktif."
+      },
+
+      // ==================== SUB-BAB 4: REGULASI HORMONAL & SARAF PENCERNAAN (28 - 33) ====================
+      {
+        id: 28,
+        topic: "Regulasi Hormon Sekretin & CCK",
+        level: "C4 • Analisis",
+        stimulus: `Ketika kimus yang sangat asam (pH 2,0) dan kaya akan trigliserida serta peptida meninggalkan lambung melalui sfingter pilorus menuju duodenum, sel-sel enteroendokrin pada mukosa duodenum segera melepaskan hormon <strong>Sekretin</strong> dan <strong>Kolesistokinin (CCK)</strong> ke dalam aliran darah.`,
+        question: "Analisis mekanisme umpan balik terkoordinasi yang dilakukan oleh hormon Sekretin dan CCK untuk mengoptimalkan pencernaan di usus halus adalah...",
+        options: [
+          "Sekretin merangsang sel parietal lambung memproduksi lebih banyak HCl, sedangkan CCK memicu relaksasi kantung empedu.",
+          "Sekretin merangsang sel duktal pankreas mensekresi cairan kaya bikarbonat ($HCO_3^-$), CCK merangsang sel asinar pankreas mensekresi enzim serta kontraksi kantung empedu, dan keduanya menghambat motilitas lambung.",
+          "Sekretin dan CCK bekerja sama mempercepat pengosongan lambung agar kimus asam segera mencapai ileum dalam waktu 5 menit.",
+          "CCK menghambat sekresi lipase pankreas sementara sekretin mengubah tripsinogen menjadi tripsin secara langsung.",
+          "Sekretin merangsang kelenjar ludah memproduksi ptialin sedangkan CCK menutup sfingter Oddi secara permanen."
+        ],
+        correctAnswer: 1,
+        explanation: "Sekretin (dari sel S duodenum) merespons pH asam dengan merangsang sel duktal pankreas dan saluran empedu mensekresi bikarbonat untuk menetralkan asam. CCK (dari sel I duodenum) merespons lemak dan asam amino dengan merangsang sekresi enzim asinar pankreas, kontraksi kantung empedu, relaksasi sfingter Oddi, serta memperlambat pengosongan lambung (enterogastrik)."
+      },
+      {
+        id: 29,
+        topic: "Fase-Fase Sekresi Lambung",
+        level: "C4 • Analisis",
+        stimulus: `Sekresi getah lambung dibagi menjadi tiga fase: <strong>fase sefalik</strong> (~30% total sekresi), <strong>fase gastrik</strong> (~60%), dan <strong>fase intestinal</strong> (~10%). Pada eksperimen klasik <em>sham feeding</em> (pemberian makan semu pada hewan uji di mana esofagus dipotong sehingga makanan yang dikunyah dan ditelan jatuh keluar tanpa pernah masuk ke lambung), tercatat bahwa getah lambung tetap disekresikan dalam volume yang signifikan.`,
+        question: "Jalur persarafan dan mekanisme yang menjelaskan terjadinya sekresi getah lambung pada eksperimen <em>sham feeding</em> tersebut adalah...",
+        options: [
+          "Peregangan dinding fundus lambung mengaktifkan refleks lokal pleksus submukosa Meissner.",
+          "Rangsangan visual, olfaktori, dan pengecapan diteruskan ke medula oblongata yang mengirimkan impuls parasimpatis melalui <strong>nervus vagus (saraf kranial X)</strong> untuk merangsang sel parietal, sel chief, dan sel G lambung.",
+          "Distensi duodenum memicu pelepasan hormon sekretin yang merangsang sel chief mensekresi pepsinogen.",
+          "Peningkatan glukosa darah setelah mengunyah merangsang hipotalamus melepaskan hormon gastrin ke aliran darah.",
+          "Impuls simpatis dari medula spinalis memicu kontraksi sfingter pilorus sehingga getah lambung terperas keluar."
+        ],
+        correctAnswer: 1,
+        explanation: "Fase sefalik terjadi bahkan sebelum makanan menyentuh lambung. Pikiran, penglihatan, bau, dan rasa makanan di mulut merangsang korteks serebri dan hipotalamus -> medula oblongata -> serabut parasimpatis nervus vagus (X) -> merangsang sel parietal (HCl), sel chief (pepsinogen), dan sel G (gastrin)."
+      },
+      {
+        id: 30,
+        topic: "Evaluasi Farmakologi Sekresi Asam Lambung",
+        level: "C5 • Evaluasi",
+        stimulus: `Membran basolateral sel parietal lambung memiliki tiga jenis reseptor stimulatoris untuk sekresi HCl: reseptor <strong>M3</strong> (untuk asetilkolin), reseptor <strong>CCK-B</strong> (untuk hormon gastrin), dan reseptor <strong>H2</strong> (untuk histamin parakrin dari sel ECL). Ketiga jalur sinyal ini pada akhirnya bermuara pada aktivasi pompa <strong>$H^+/K^+$-ATPase (pompa proton)</strong> pada membran apikal sel parietal.`,
+        question: "Berdasarkan jalur sinyal seluler tersebut, mengapa obat golongan <em>Proton Pump Inhibitor</em> (seperti Omeprazol) jauh lebih efektif menekan produksi asam lambung dibandingkan obat antagonis reseptor H2 (seperti Ranitidin)?",
+        options: [
+          "Omeprazol menetralkan ion $H^+$ di dalam lumen lambung secara kimiawi seperti basa kuat NaOH.",
+          "Ranitidin hanya memblokir stimulasi jalur histamin sehingga asetilkolin dan gastrin masih dapat mengaktifkan sekresi asam, sedangkan Omeprazol memblokir tahap akhir pompa $H^+/K^+$-ATPase secara langsung sehingga seluruh jalur stimulasi terhenti.",
+          "Omeprazol merangsang sel G lambung untuk berhenti mensintesis hormon gastrin secara permanen.",
+          "Ranitidin hanya bekerja pada fase sefalik sedangkan Omeprazol bekerja khusus pada fase intestinal di kolon.",
+          "Omeprazol meningkatkan sekresi enzim pepsinogen untuk mengikat ion $H^+$ bebas di dalam kelenjar fundus."
+        ],
+        correctAnswer: 1,
+        explanation: "Antagonis reseptor H2 hanya mengeblok satu dari tiga reseptor stimulatoris sel parietal (jalur histamin), sehingga rangsangan langsung dari nervus vagus (asetilkolin) dan gastrin masih bisa memicu sekresi HCl. Sebaliknya, PPI (omeprazol) menghambat secara ireversibel pompa $H^+/K^+$-ATPase yang merupakan jalur keluar final bagi semua ion $H^+$."
+      },
+      {
+        id: 31,
+        topic: "Hormon Incretin (GIP & GLP-1)",
+        level: "C4 • Analisis",
+        stimulus: `Dalam penelitian endokrinologi pencernaan, relawan sehat diberikan 50 gram glukosa secara oral (diminum), dan pada hari lain diberikan infus glukosa intravena dengan kecepatan yang diatur agar kurva kadar glukosa darahnya identik. Hasil pengukuran menunjukkan bahwa lonjakan hormon <strong>insulin</strong> plasma jauh lebih tinggi pada pemberian glukosa oral dibandingkan intravena (fenomena <em>Incretin Effect</em>).`,
+        question: "Mekanisme hormonal sistem pencernaan yang mendasari terjadinya <em>Incretin Effect</em> tersebut adalah...",
+        options: [
+          "Keberadaan glukosa di lumen usus halus merangsang sel enteroendokrin mensekresikan hormon <strong>GIP</strong> (<em>Glucose-dependent Insulinotropic Peptide</em>) dan <strong>GLP-1</strong> yang menyiagakan sel beta pankreas untuk melepaskan insulin lebih awal dan lebih besar.",
+          "Amilase saliva mengubah glukosa oral menjadi galaktosa yang memiliki afinitas lebih tinggi terhadap reseptor sel beta pankreas.",
+          "Glukosa intravena langsung disaring oleh glomerulus ginjal sebelum sempat mencapai pankreas.",
+          "Peregangan dinding lambung memicu sekresi hormon gastrin yang mengubah glukagon menjadi insulin di dalam hati.",
+          "Garam empedu berikatan dengan glukosa oral membentuk kompleks yang menghambat kerja enzim insulinase."
+        ],
+        correctAnswer: 0,
+        explanation: "Hormon inkretin—terutama GIP (dari sel K duodenum/jejunum) dan GLP-1 (dari sel L ileum/kolon)—disekresikan saat nutrien (glukosa/asam lemak) berada di lumen usus halus. Hormon ini merangsang sel beta pulau Langerhans pankreas mensekresi insulin sebagai antisipasi lonjakan glukosa yang akan diserap."
+      },
+      {
+        id: 32,
+        topic: "Evaluasi Sindrom Zollinger-Ellison",
+        level: "C5 • Evaluasi",
+        stimulus: `Seorang pasien menderita <em>Sindrom Zollinger-Ellison</em> akibat adanya tumor neuroendokrin (gastrinoma) di pankreas yang mensekresikan hormon <strong>gastrin</strong> dalam kadar sangat tinggi secara otonom (tidak terhambat oleh umpan balik negatif pH lambung yang rendah). Pasien mengalami tukak duodenum berulang yang parah serta diare berlemak (<em>steatorea</em>).`,
+        question: "Evaluasi yang tepat mengenai penyebab munculnya diare berlemak (<em>steatorea</em>) pada pasien dengan tumor penghasil gastrin berlebih tersebut adalah...",
+        options: [
+          "Hormon gastrin menghambat kontraksi otot polos usus halus secara langsung sehingga lemak mengendap di lumen.",
+          "Hipersekresi asam lambung yang ekstrem melampaui kapasitas penetralan bikarbonat pankreas di duodenum, sehingga pH duodenum tetap asam dan mendenaturasi enzim lipase pankreas serta mengendapkan garam empedu.",
+          "Tumor gastrinoma menyumbat pembuluh lakteal pada seluruh permukaan vilus jejunum dan ileum.",
+          "Gastrin merangsang hati mengubah seluruh asam lemak menjadi glikogen sebelum sempat diekskresikan ke empedu.",
+          "Peningkatan gastrin memicu sekresi enzim enterokinase berlebih yang menghancurkan trigliserida menjadi gas metana."
+        ],
+        correctAnswer: 1,
+        explanation: "Gastrin berlebih memicu hiperplasia sel parietal dan sekresi HCl masif. Volume asam yang masuk ke duodenum melampaui kapasitas netralisasi $HCO_3^-$ pankreas, membuat pH duodenum tetap asam. Pada pH asam, enzim lipase pankreas terinaktivasi dan asam empedu mengalami presipitasi (mengendap) sehingga gagal mengemulsikan lemak (steatorea)."
+      },
+      {
+        id: 33,
+        topic: "Regulasi Nafsu Makan (Ghrelin vs Leptin & PYY)",
+        level: "C4 • Analisis",
+        stimulus: `Regulasi rasa lapar dan kenyang melibatkan interaksi hormon perifer dengan nukleus arkuatus di hipotalamus. <strong>Ghrelin</strong> disekresikan terutama oleh sel oksintik fundus lambung saat lambung kosong, sedangkan <strong>Peptida YY (PYY)</strong> dan <strong>CCK</strong> disekresikan oleh usus setelah makan, serta <strong>Leptin</strong> disekresikan oleh jaringan adiposa.`,
+        question: "Pasien obesitas morbid yang menjalani operasi bedah bariatrik <em>Sleeve Gastrectomy</em> (pemotongan sekitar 75–80% bagian fundus dan korpus lambung) umumnya mengalami penurunan rasa lapar yang drastis pasca-operasi. Analisis hormonal yang paling tepat menjelaskan hal ini adalah...",
+        options: [
+          "Pemotongan fundus lambung menghilangkan sebagian besar sel penghasil hormon <strong>ghrelin</strong> (hormon pemicu lapar) sehingga stimulasi pusat lapar di hipotalamus menurun signifikan.",
+          "Pemotongan fundus meningkatkan produksi hormon leptin secara langsung oleh mukosa esofagus.",
+          "Sisa lambung yang mengecil menghasilkan hormon sekretin dalam jumlah besar yang menekan pusat nafsu makan.",
+          "Operasi tersebut memutus seluruh saraf simpatis yang menghubungkan usus besar dengan hipotalamus.",
+          "Pengecilan volume lambung meningkatkan absorpsi glukosa langsung menembus epitel lambung."
+        ],
+        correctAnswer: 0,
+        explanation: "Bagian fundus lambung adalah sumber utama produksi hormon ghrelin ('hormon lapar') yang meningkat sebelum makan dan merangsang neuron NPY/AgRP di hipotalamus. Reseksi bagian fundus pada <em>sleeve gastrectomy</em> menurunkan kadar ghrelin plasma secara drastis sehingga nafsu makan berkurang."
+      },
+
+      // ==================== SUB-BAB 5: GANGGUAN KLINIS & TEKNOLOGI DIAGNOSTIK (34 - 43) ====================
+      {
+        id: 34,
+        topic: "Patofisiologi Ulkus Peptikum (H. pylori)",
+        level: "C4 • Analisis",
+        stimulus: `Bakteri gram negatif berbentuk spiral <em>Helicobacter pylori</em> merupakan penyebab utama gastritis kronis dan ulkus peptikum (tukak lambung/duodenum). Meskipun lambung memiliki pH lumen 1,5–2,0 yang mampu membunuh hampir semua mikroorganisme tertelan, <em>H. pylori</em> mampu bertahan hidup dan berkolonisasi di bawah lapisan mukus lambung.`,
+        question: "Adaptasi biokimia kunci yang memungkinkan <em>Helicobacter pylori</em> bertahan dari keasaman lambung sekaligus merusak sawar mukosa epitel adalah...",
+        options: [
+          "Membentuk endospora berdinding peptidoglikan tebal yang kebal terhadap ion $H^+$ dan enzim pepsin.",
+          "Menghasilkan enzim <strong>urease</strong> dalam jumlah tinggi yang menghidrolisis urea menjadi amonia ($NH_3$) dan $CO_2$ untuk menciptakan awan mikro-lingkungan basa di sekitarnya, serta mensekresi sitotoksin (VacA/CagA) yang merusak sel epitel.",
+          "Mensekresikan hormon sekretin tiruan yang menutup seluruh kanal pompa proton pada sel parietal.",
+          "Mengubah glukosa lambung menjadi lapisan kitin pelindung di permukaan mikrovili.",
+          "Menghambat sintesis DNA sel mukus lambung melalui pelepasan enzim ribonuklease."
+        ],
+        correctAnswer: 1,
+        explanation: "<em>H. pylori</em> memiliki flagela untuk menembus gel mukus kental dan memproduksi enzim urease sangat aktif yang memecah urea menjadi amonia ($NH_3$) + $CO_2$. Amonia menangkap ion $H^+$ membentuk $NH_4^+$, menetralkan asam di sekitar bakteri. Namun, amonia berlebih dan toksin VacA/CagA merusak taut ketat dan sel epitel mukosa."
+      },
+      {
+        id: 35,
+        topic: "Intoleransi Laktosa & Hydrogen Breath Test",
+        level: "C4 • Analisis",
+        stimulus: `Dua siswa (Siswa M dan Siswa N) menjalani pemeriksaan <em>Hydrogen Breath Test</em> (uji napas hidrogen) setelah meminum larutan yang mengandung 50 gram laktosa murni dalam kondisi puasa. Kadar gas hidrogen ($H_2$) dalam udara ekspirasi diukur setiap 30 menit (nilai normal < 20 ppm):
+        <table class="stimulus-table">
+          <thead>
+            <tr><th>Waktu Pengukuran</th><th>0 Menit</th><th>30 Menit</th><th>60 Menit</th><th>90 Menit</th><th>120 Menit</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Siswa M (ppm $H_2$)</strong></td><td>4</td><td>6</td><td>8</td><td>7</td><td>5</td></tr>
+            <tr><td><strong>Siswa N (ppm $H_2$)</strong></td><td>5</td><td>18</td><td>46</td><td>74</td><td>68</td></tr>
+          </tbody>
+        </table>
+        Pada menit ke-75, Siswa N juga mengeluhkan perut kembung, nyeri kram, dan diare cair.`,
+        question: "Analisis fisiologis yang paling tepat menjelaskan lonjakan gas $H_2$ pada napas Siswa N serta mekanisme diare yang dialaminya adalah...",
+        options: [
+          "Siswa N mengalami alergi protein kasein susu yang memicu sel mast melepaskan histamin dan gas hidrogen ke alveolus paru.",
+          "Defisiensi enzim <strong>laktase</strong> pada <em>brush border</em> usus halus Siswa N menyebabkan laktosa tidak terhidrolisis dan menarik air secara osmosis di lumen usus (diare osmotik), lalu difermentasi oleh bakteri kolon menghasilkan gas $H_2$, $CO_2$, dan $CH_4$ yang berdifusi ke darah menuju paru-paru.",
+          "Enzim laktase Siswa N bekerja terlalu cepat memecah laktosa menjadi asam laktat dan gas hidrogen di dalam lambung.",
+          "Siswa N mengalami infeksi bakteri <em>Vibrio cholerae</em> yang mengubah laktosa menjadi toksin penyebab diare sekretorik.",
+          "Laktosa pada Siswa N langsung diserap oleh pembuluh lakteal dan dioksidasi menjadi gas $H_2$ oleh sel endotel paru."
+        ],
+        correctAnswer: 1,
+        explanation: "Pada intoleransi laktosa (hipolaktasia), disakarida laktosa gagal dipecah menjadi glukosa + galaktosa oleh enzim laktase di mikrovili usus halus. Laktosa yang aktif secara osmotik menarik air masuk ke lumen usus (diare osmotik) dan masuk ke kolon, tempat bakteri anaerob memfermentasinya menghasilkan asam lemak rantai pendek serta gas $H_2$, $CO_2$, dan metana. Gas $H_2$ diserap ke darah dan diembuskan lewat paru-paru."
+      },
+      {
+        id: 36,
+        topic: "Evaluasi Diare Osmotik vs Diare Sekretorik",
+        level: "C5 • Evaluasi",
+        stimulus: `Seorang dokter membandingkan dua pasien diare akut:
+        <br>• <strong>Pasien 1:</strong> Terinfeksi bakteri <em>Vibrio cholerae</em> yang menghasilkan toksin kolera (mengaktivasi enzim adenilat siklase secara permanen sehingga kadar cAMP intraseluler enterosit melonjak tajam).
+        <br>• <strong>Pasien 2:</strong> Mengonsumsi permen bebas gula mengandung pemanis alkohol <strong>sorbitol</strong> (sulit diserap usus) dalam jumlah berlebihan.
+        <br>Kedua pasien diminta menjalani uji puasa makan/minum selama 24 jam dengan pemenuhan cairan melalui infus intravena.`,
+        question: "Evaluasi perbedaan klinis yang akan teramati pada kedua pasien setelah berpuasa selama 24 jam adalah...",
+        options: [
+          "Diare pada Pasien 1 akan langsung berhenti saat berpuasa, sedangkan diare pada Pasien 2 terus berlangsung deras dengan kehilangan elektrolit masif.",
+          "Diare pada Pasien 2 (diare osmotik) akan berhenti karena tidak ada lagi zat terlarut sorbitol yang menarik air ke lumen usus, sedangkan diare pada Pasien 1 (diare sekretorik) tetap berlangsung karena toksin kolera terus memicu kanal CFTR mensekresikan ion $Cl^-$ dan air secara aktif.",
+          "Kedua pasien akan mengalami peningkatan osmolalitas feses yang sama akibat penghambatan enzim sukrase dan maltase.",
+          "Pasien 1 mengalami konstipasi paradoks karena cAMP menutup seluruh kanal ion pada membran apikal enterosit.",
+          "Sorbitol pada Pasien 2 mengaktifkan adenilat siklase lebih kuat daripada toksin kolera sehingga diarenya berlanjut saat puasa."
+        ],
+        correctAnswer: 1,
+        explanation: "Ciri diagnostik utama pembeda diare osmotik dan sekretorik adalah respons terhadap puasa. Diare osmotik (akibat zat tak terserap seperti sorbitol/laktosa di lumen) mereda saat asupan dihentikan. Diare sekretorik (akibat toksin kolera yang memicu lonjakan cAMP -> pembukaan kanal $Cl^-$ CFTR -> sekresi aktif $Na^+$ dan air ke lumen) tetap berlanjut meskipun pasien berpuasa."
+      },
+      {
+        id: 37,
+        topic: "Kolelitiasis (Batu Empedu) & Ikterus Obstruktif",
+        level: "C4 • Analisis",
+        stimulus: `Seorang ibu berusia 45 tahun datang ke rumah sakit dengan keluhan nyeri hebat di perut kanan atas setelah makan gulai bersantan, sklera mata dan kulit tampak menguning (<em>ikterus</em>), urine berwarna cokelat gelap seperti air teh, serta feses berwarna pucat keabu-abuan seperti dempul (<em>feses akolik</em>). Hasil USG abdomen menunjukkan adanya batu empedu yang menyumbat total <strong>duktus koledokus</strong>.`,
+        question: "Analisis mekanisme biokimia yang menjelaskan munculnya feses pucat seperti dempul dan urine berwarna seperti teh pekat pada pasien tersebut adalah...",
+        options: [
+          "Bilirubin tak terkonjugasi gagal masuk ke hepatosit sehingga langsung diekskresikan melalui kelenjar keringat dan ginjal.",
+          "Bilirubin terkonjugasi dari hati terhalang masuk ke duodenum sehingga tidak dapat diubah bakteri usus menjadi sterkobilin (pigmen cokelat feses), melainkan mengalami refluks ke darah dan diekskresikan ginjal lewat urine.",
+          "Batu empedu memecah eritrosit secara mekanis di dalam duodenum sehingga hemoglobin mewarnai urine menjadi cokelat.",
+          "Pankreas berhenti memproduksi enzim amilase sehingga pati yang tidak tercerna membuat feses berwarna putih pucat.",
+          "Sel parietal lambung mensekresikan bilirubin secara terbalik menuju aliran darah vena porta."
+        ],
+        correctAnswer: 1,
+        explanation: "Hati mengonjugasikan bilirubin menjadi bilirubin direk (terkonjugasi/larut air) dan mensekresikannya bersama empedu ke duodenum. Di usus, bakteri mengubahnya menjadi urobilinogen -> sterkobilin (memberi warna cokelat feses). Penyumbatan duktus koledokus mencegah bilirubin masuk ke usus (feses pucat/akolik) dan memaksa bilirubin terkonjugasi meluap ke darah (ikterus) lalu disaring ginjal menjadi urine gelap."
+      },
+      {
+        id: 38,
+        topic: "Penyakit Celiac & Atrofi Vili",
+        level: "C4 • Analisis",
+        stimulus: `Pada penderita <strong>Penyakit Celiac</strong>, konsumsi makanan berbahan gandum, jelai (<em>barley</em>), atau gandum hitam (<em>rye</em>) yang mengandung protein <strong>gluten (gliadin)</strong> memicu respons autoimun sel T yang merusak sel epitel usus halus, menyebabkan pemendekan dan pendataran vili (<em>atrofi vili</em>) serta hiperplasia kripta.`,
+        question: "Analisis dampak jangka panjang dari atrofi vili usus halus terhadap metabolisme tulang dan keseimbangan cairan jaringan pasien Celiac yang tidak ditangani adalah...",
+        options: [
+          "Berkurangnya luas permukaan absorpsi menyebabkan malabsorpsi kalsium dan vitamin D (memicu osteomalasia/osteoporosis) serta malabsorpsi asam amino/protein sehingga kadar albumin darah turun dan memicu edema jaringan.",
+          "Pendataran vili meningkatkan kecepatan difusi lemak ke pembuluh lakteal sehingga terjadi hipertensi arteri.",
+          "Atrofi vili merangsang sekresi berlebih hormon PTH dan kalsitonin yang menebalkan tulang rawan sendi.",
+          "Hilangnya mikrovili meningkatkan penyerapan air secara berlebihan di jejunum sehingga pasien mengalami hipertensi portal.",
+          "Gluten berikatan langsung dengan osteoblas tulang dan menghambat deposisi matriks kolagen."
+        ],
+        correctAnswer: 0,
+        explanation: "Vili dan mikrovili memperluas area permukaan absorpsi usus halus hingga ~600 kali lipat. Atrofi vili memangkas luas area penyerapan secara drastis, menyebabkan malabsorpsi multizat gizi: defisiensi Ca dan vitamin D memicu demineralisasi tulang (osteomalasia), sedangkan defisiensi protein menurunkan sintesis albumin hati sehingga tekanan onkotik plasma turun dan timbul edema."
+      },
+      {
+        id: 39,
+        topic: "Evaluasi GERD & Esofagus Barrett",
+        level: "C5 • Evaluasi",
+        stimulus: `Pada penderita <em>Gastroesophageal Reflux Disease</em> (GERD) kronis yang tidak diobati bertahun-tahun, asam lambung dan pepsin berulang kali naik melewati sfingter esofagus bawah yang lemah. Pemeriksaan biopsi mukosa esofagus distal menunjukkan terjadinya kondisi <strong>Esofagus Barrett</strong>, yaitu perubahan jaringan epitel pipih berlapis tak bertanduk menjadi epitel silindris selapis penghasil mukus (metaplasia intestinal).`,
+        question: "Evaluasi biologis yang paling tepat mengenai makna adaptif sekaligus bahaya klinis dari perubahan histologis Esofagus Barrett tersebut adalah...",
+        options: [
+          "Metaplasia menjadi epitel silindris penghasil mukus merupakan adaptasi seluler agar dinding esofagus lebih tahan terhadap paparan asam, namun pembelahan sel yang terus terpicu inflamasi kronis meningkatkan risiko transformasi ganas (adenokarsinoma esofagus).",
+          "Perubahan epitel tersebut bersifat menguntungkan secara permanen karena esofagus kini mampu membantu lambung mencerna protein.",
+          "Epitel pipih berlapis berubah menjadi epitel silindris karena esofagus mulai mensekresikan hormon gastrin dan HCl sendiri.",
+          "Esofagus Barrett menandakan bahwa bakteri <em>Helicobacter pylori</em> telah berhasil mengubah DNA otot rangka esofagus.",
+          "Metaplasia tersebut akan menghilang dalam 24 jam setelah pasien mengonsumsi enzim amilase tambahan."
+        ],
+        correctAnswer: 0,
+        explanation: "Metaplasia adalah penggantian satu jenis sel dewasa dengan jenis sel dewasa lain yang lebih tahan terhadap stres lingkungan (epitel silindris bermukus lebih tahan asam dibanding epitel pipih berlapis). Namun, jika stres refluks asam terus berlanjut, proses proliferasi sel metaplastik ini rentan mengalami mutasi displasia hingga adenokarsinoma esofagus."
+      },
+      {
+        id: 40,
+        topic: "Sirosis Hati, Hipertensi Portal & Asites",
+        level: "C4 • Analisis",
+        stimulus: `Pada pasien <strong>sirosis hati</strong> stadium lanjut, jaringan parenkim hepatosit yang normal banyak digantikan oleh jaringan ikat fibrosa (parut) yang kaku. Selain kulit menguning, pasien menunjukkan pembesaran rongga perut yang berisi tumpukan cairan serosa dalam jumlah besar (<strong>asites</strong>) serta pelebaran pembuluh darah di sekitar pusar (<em>caput medusae</em>).`,
+        question: "Kombinasi dua mekanisme fisiologis utama yang menyebabkan akumulasi cairan asites di dalam rongga peritoneum pasien sirosis hati adalah...",
+        options: [
+          "Peningkatan tekanan hidrostatik akibat hambatan aliran darah pada vena porta hepatika (hipertensi portal) disertai penurunan tekanan onkotik koloid plasma akibat kegagalan hati mensintesis protein albumin.",
+          "Penurunan tekanan darah vena porta disertai peningkatan produksi bilirubin terkonjugasi yang menarik cairan limfa ke abdomen.",
+          "Peningkatan sekresi hormon CCK yang merangsang peritoneum mensekresikan getah empedu ke rongga perut.",
+          "Kegagalan hati menghidrolisis glikogen menjadi glukosa sehingga terjadi penyumbatan total pada arteri renalis.",
+          "Peningkatan drastis tekanan osmotik sel darah merah akibat kelebihan enzim SGOT dan SGPT di dalam plasma."
+        ],
+        correctAnswer: 0,
+        explanation: "Jaringan fibrosa sirosis menekan cabang-cabang vena porta di hati, meningkatkan tekanan hidrostatik vena porta (hipertensi portal) yang mendorong cairan keluar dari kapiler splanikus ke rongga peritoneum. Pada saat yang sama, kerusakan hepatosit menurunkan sintesis albumin serum (hipoalbuminemia), menurunkan tekanan onkotik yang menahan cairan di dalam pembuluh darah."
+      },
+      {
+        id: 41,
+        topic: "Evaluasi Teknologi Diagnostik Pencernaan",
+        level: "C5 • Evaluasi",
+        stimulus: `Tiga pasien dengan keluhan saluran pencernaan dirujuk ke unit gastroenterologi:
+        <br>• <strong>Pasien X:</strong> Mengalami muntah darah segar (hematemesis) dan nyeri ulu hati hebat setelah mengonsumsi obat antinyeri NSAID dosis tinggi selama 2 bulan.
+        <br>• <strong>Pasien Y:</strong> Mengalami perubahan pola buang air besar kronis, feses bercampur darah merah gelap, dan penurunan berat badan tanpa sebab pada usia 58 tahun.
+        <br>• <strong>Pasien Z:</strong> Mengalami ikterus obstruktif akibat dugaan batu kecil yang terjepit di muara duktus koledokus dan membutuhkan pengangkatan batu tanpa operasi bedah terbuka.`,
+        question: "Evaluasi pemilihan prosedur teknologi medis yang paling tepat secara berurutan untuk Pasien X, Pasien Y, dan Pasien Z adalah...",
+        options: [
+          "Kolonoskopi — Endoskopi saluran cerna atas (EGD) — Foto rontgen polos abdomen",
+          "Endoskopi saluran cerna atas (EGD) — Kolonoskopi — <em>Endoscopic Retrograde Cholangiopancreatography</em> (ERCP)",
+          "ERCP — Ultrasonografi (USG) tiroid — Kolonoskopi",
+          "Endoskopi kapsul — Biopsi kelenjar parotis — Pemeriksaan feses rutin",
+          "Kolonoskopi — ERCP — Endoskopi saluran cerna atas (EGD)"
+        ],
+        correctAnswer: 1,
+        explanation: "Esofagogastroduodenoskopi (EGD/endoskopi atas) memvisualisasikan esofagus, lambung, dan duodenum untuk mencari sumber perdarahan tukak akibat NSAID (Pasien X). Kolonoskopi memeriksa seluruh mukosa usus besar dan rektum untuk deteksi polip/kanker kolon (Pasien Y). ERCP menggabungkan endoskopi dan fluoroskopi untuk mengakses duktus bilier/pankreas serta mengekstraksi batu empedu di muara saluran (Pasien Z)."
+      },
+      {
+        id: 42,
+        topic: "Patogenesis Apendisitis Akut",
+        level: "C4 • Analisis",
+        stimulus: `Apendiks vermiformis merupakan kantung buntu yang berpangkal pada sekum. Pada kasus <strong>apendisitis akut</strong>, peristiwa awal yang paling sering terjadi adalah tersumbatnya lumen apendiks yang sempit oleh massa feses yang mengeras (<em>fekalit</em>) atau hiperplasia jaringan limfoid.`,
+        question: "Urutan kaskade patofisiologis yang tepat setelah terjadinya penyumbatan lumen apendiks hingga berisiko menimbulkan komplikasi fatal (peritonitis) adalah...",
+        options: [
+          "Akumulasi mukus & proliferasi bakteri → peningkatan tekanan intraluminal → hambatan aliran vena dan arteri (iskemia dinding) → nekrosis jaringan → perforasi (pecahnya) dinding apendiks ke rongga peritoneum.",
+          "Penurunan sekresi mukus → masuknya HCl lambung ke sekum → tercernanya dinding apendiks oleh pepsin → perdarahan esofagus.",
+          "Peningkatan peristaltik ileum → terisapnya apendiks ke dalam kolon transversum → penyumbatan duktus pankreatikus.",
+          "Penurunan jumlah bakteri kolon → pengeringan feses di apendiks → terbentuknya batu empedu di dalam sekum.",
+          "Pelepasan hormon gastrin oleh apendiks → peningkatan keasaman darah → syok anafilaktik."
+        ],
+        correctAnswer: 0,
+        explanation: "Mukosa apendiks terus mensekresi mukus meskipun lumennya tersumbat fekalit. Tekanan intraluminal meningkat tajam, menjepit pembuluh darah vena lalu arteri dinding apendiks (iskemia), diperparah invasi bakteri sehingga terjadi kematian jaringan (gangren/nekrosis) dan perforasi yang menyebarkan bakteri ke rongga peritoneum (peritonitis)."
+      },
+      {
+        id: 43,
+        topic: "Perancangan Strategi Pencegahan Konstipasi",
+        level: "C6 • Mencipta",
+        stimulus: `Seorang siswa sering menahan keinginan buang air besar saat berada di sekolah hingga berjam-jam dan kurang minum air putih, sehingga mengalami konstipasi kronis (feses keras, kering, dan sulit dikeluarkan).`,
+        question: "Berdasarkan fisiologi motilitas kolon dan <strong>refleks gastrokolik</strong>, rancangan intervensi fisiologis terpadu yang paling efektif untuk memulihkan pola defekasi normal siswa tersebut adalah...",
+        options: [
+          "Menunda sarapan hingga siang hari agar kolon desendens tidak menerima impuls saraf dari lambung.",
+          "Membiasakan sarapan pagi bergizi kaya serat tidak larut + minum air cukup untuk memicu <strong>refleks gastrokolik</strong> (gelombang massa kolon mendorong feses ke rektum), serta segera merespons refleks defekasi tanpa menundanya agar air feses tidak terus direabsorpsi kolon.",
+          "Mengonsumsi obat pencahar stimulan setiap hari agar mukosa kolon berhenti menyerap elektrolit secara permanen.",
+          "Mengganti seluruh asupan karbohidrat dengan protein hewani murni agar sisa metabolisme feses berkurang.",
+          "Berbaring telentang segera setelah makan malam untuk menghambat kontraksi sfingter ani eksternus."
+        ],
+        correctAnswer: 1,
+        explanation: "Ketika makanan masuk ke lambung (terutama saat sarapan), peregangan lambung dan hormon gastrin/CCK memicu <em>refleks gastrokolik</em> yang menggerakkan massa feses di kolon menuju rektum. Jika refleks defekasi diabaikan, feses tertahan di kolon sigmoid dan air terus diserap mukosa kolon sehingga feses mengeras."
+      },
+
+      // ==================== SUB-BAB 6: PERBANDINGAN MANUSIA & HEWAN RUMINANSIA (44 - 50) ====================
+      {
+        id: 44,
+        topic: "Anatomi & Alur Lambung Ruminansia",
+        level: "C4 • Analisis",
+        stimulus: `Perhatikan diagram skematis empat kompartemen lambung pada hewan ruminansia (sapi) beserta arah panah aliran pakan berikut ini:
+        <div class="bg-white p-3 rounded-xl border border-slate-200 my-2 flex justify-center">
+          <svg class="w-full max-w-md h-44" viewBox="0 0 380 160">
+            <!-- Esophagus -->
+            <rect x="15" y="25" width="75" height="22" rx="6" fill="#e2e8f0" stroke="#475569" stroke-width="1.5"/>
+            <text x="27" y="40" font-size="10" font-weight="bold" fill="#1e293b">Esofagus</text>
+            <!-- Chamber 1: Rumen -->
+            <rect x="120" y="12" width="105" height="48" rx="14" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
+            <text x="148" y="34" font-size="11" font-weight="bold" fill="#065f46">Ruang 1</text>
+            <text x="135" y="48" font-size="9" fill="#047857">(Fermentasi Utama)</text>
+            <!-- Chamber 2: Retikulum -->
+            <rect x="120" y="82" width="105" height="45" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+            <text x="148" y="103" font-size="11" font-weight="bold" fill="#92400e">Ruang 2</text>
+            <text x="135" y="117" font-size="9" fill="#b45309">(Pembentuk Bolus)</text>
+            <!-- Chamber 3: Omasum -->
+            <rect x="260" y="20" width="95" height="42" rx="10" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+            <text x="284" y="40" font-size="11" font-weight="bold" fill="#1e40af">Ruang 3</text>
+            <text x="271" y="53" font-size="9" fill="#1d4ed8">(Absorpsi Air)</text>
+            <!-- Chamber 4: Abomasum -->
+            <rect x="260" y="85" width="95" height="45" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+            <text x="284" y="106" font-size="11" font-weight="bold" fill="#991b1b">Ruang 4</text>
+            <text x="271" y="120" font-size="9" fill="#b91c1c">(Sekresi HCl & Enzim)</text>
+            <!-- Arrows -->
+            <path d="M90,36 L118,36" stroke="#334155" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M165,60 L165,80" stroke="#334155" stroke-width="1.8"/>
+            <path d="M180,80 L180,60" stroke="#334155" stroke-width="1.8"/>
+            <path d="M120,104 L65,104 L65,49" stroke="#d97706" stroke-width="1.8" stroke-dasharray="3,2"/>
+            <text x="20" y="85" font-size="9" font-weight="bold" fill="#b45309">Regurgitasi</text>
+            <path d="M225,95 L245,95 L245,41 L258,41" stroke="#334155" stroke-width="1.8"/>
+            <path d="M307,62 L307,83" stroke="#334155" stroke-width="1.8"/>
+          </svg>
+        </div>`,
+        question: "Identifikasi nama kompartemen Ruang 1, Ruang 2, Ruang 3, dan Ruang 4 yang paling tepat beserta ruang yang berfungsi analog dengan lambung manusia adalah...",
+        options: [
+          "Ruang 1: Retikulum, Ruang 2: Rumen, Ruang 3: Abomasum, Ruang 4: Omasum — dengan Ruang 1 analog lambung manusia.",
+          "Ruang 1: Rumen, Ruang 2: Retikulum, Ruang 3: Omasum, Ruang 4: Abomasum — dengan Ruang 4 (Abomasum) sebagai lambung sejati yang analog dengan lambung manusia.",
+          "Ruang 1: Omasum, Ruang 2: Abomasum, Ruang 3: Rumen, Ruang 4: Retikulum — dengan Ruang 3 analog lambung manusia.",
+          "Ruang 1: Rumen, Ruang 2: Omasum, Ruang 3: Retikulum, Ruang 4: Abomasum — dengan Ruang 2 analog lambung manusia.",
+          "Ruang 1: Abomasum, Ruang 2: Retikulum, Ruang 3: Omasum, Ruang 4: Rumen — dengan Ruang 4 analog lambung manusia."
+        ],
+        correctAnswer: 1,
+        explanation: "Urutan perjalanan pakan ruminansia: Esofagus -> Rumen (Ruang 1, kantung fermentasi terbesar) <-> Retikulum (Ruang 2, dinding sarang lebah yang membentuk bolus untuk regurgitasi ke mulut saat memamah biak) -> setelah dikunyah kedua kali melewati Omasum (Ruang 3, penyerapan air dan elektrolit) -> Abomasum (Ruang 4, lambung sejati yang mensekresi HCl dan pepsinogen seperti lambung manusia)."
+      },
+      {
+        id: 45,
+        topic: "Simbiosis Mikrobiota & Sumber Energi Ruminansia",
+        level: "C4 • Analisis",
+        stimulus: `Sapi perah mengonsumsi puluhan kilogram rumput dan jerami yang kaya akan polimer <strong>selulosa</strong> (ikatan $\beta$-1,4-glikosidik). Meskipun demikian, pengukuran kadar glukosa darah pada sapi sehat justru menunjukkan nilai yang relatif rendah (45–65 mg/dL) dibandingkan manusia (70–100 mg/dL), dan hampir tidak ada glukosa bebas yang diserap dari usus halus sapi.`,
+        question: "Analisis biokimia yang menjelaskan bagaimana sapi memperoleh sekitar 70% kebutuhan energi totalnya meskipun tidak menyerap glukosa dari pencernaan selulosa adalah...",
+        options: [
+          "Sel-sel epitel rumen sapi mensekresikan enzim selulase yang memecah selulosa menjadi trigliserida rantai panjang.",
+          "Bakteri, protozoa, dan fungi anaerob di dalam rumen-retikulum memfermentasi selulosa menjadi <strong>Asam Lemak Volatil (VFA: asetat, propionat, dan butirat)</strong> yang langsung diserap menembus dinding papila rumen ke aliran darah sebagai sumber energi utama dan prekursor glukoneogenesis di hati.",
+          "Selulosa langsung diserap utuh oleh pembuluh lakteal usus halus dan dioksidasi di dalam mitokondria otot rangka sapi.",
+          "Enzim ptialin dalam saliva sapi memutus ikatan $\beta$-1,4-glikosidik menjadi fruktosa yang langsung masuk ke siklus Krebs.",
+          "Sapi memperoleh seluruh energi ATP-nya dari oksidasi protein rumput di dalam omasum."
+        ],
+        correctAnswer: 1,
+        explanation: "Baik manusia maupun sapi tidak memiliki gen penghasil enzim selulase. Sapi bersimbiosis dengan mikroorganisme selulolitik anaerob di dalam rumen-retikulum yang menghidrolisis selulosa dan memfermentasinya menjadi Asam Lemak Volatil (VFA: asam asetat, propionat, butirat). VFA langsung diserap epitel rumen ke darah; propionat digunakan hati untuk membuat glukosa (glukoneogenesis), sedangkan asetat dan butirat menjadi sumber energi dan lemak susu."
+      },
+      {
+        id: 46,
+        topic: "Evaluasi Metabolisme Nitrogen Ruminansia vs Manusia",
+        level: "C5 • Evaluasi",
+        stimulus: `Dalam formulasi pakan ternak sapi potong, peternak sering menambahkan senyawa nitrogen non-protein (NPN) seperti <strong>urea</strong> dalam takaran terukur ke dalam campuran pakan berserat. Sebaliknya, pada manusia, urea merupakan limbah metabolisme nitrogen yang bersifat toksik dan harus segera dibuang melalui ginjal.`,
+        question: "Evaluasi perbedaan fisiologis sistem pencernaan yang memungkinkan ruminansia mengubah urea non-protein menjadi sumber asam amino esensial bagi tubuhnya adalah...",
+        options: [
+          "Epitel abomasum sapi memiliki enzim yang menggabungkan urea secara langsung dengan glukosa menjadi protein otot.",
+          "Mikroorganisme di dalam rumen memiliki enzim urease dan jalur biosintesis lengkap untuk mengubah amonia dari urea + kerangka karbon karbohidrat menjadi <strong>protein sel mikroba</strong>; ketika mikroba tersebut terbawa ke abomasum dan usus halus, tubuh mikroba dicerna oleh pepsin dan tripsin menjadi asam amino esensial.",
+          "Ginjal sapi memompa seluruh urea darah kembali ke kelenjar saliva untuk diubah menjadi enzim ptialin.",
+          "Bakteri di kolon sapi menyerap urea dari feses dan mentranspornya langsung ke kelenjar susu.",
+          "Manusia tidak dapat memanfaatkan urea karena lambung manusia memiliki pH yang terlalu tinggi untuk menghidrolisis amonia."
+        ],
+        correctAnswer: 1,
+        explanation: "Karena fermentasi mikroba terjadi di lambung bagian depan (<em>foregut fermenter</em> / rumen) SEBELUM lambung sejati (abomasum) dan usus halus, miliaran bakteri rumen yang mensintesis asam amino esensial dan vitamin B dari urea dan selulosa akan ikut mengalir ke abomasum. Di abomasum dan usus halus, mikroba tersebut dicerna sebagai sumber protein berkualitas tinggi bagi sapi."
+      },
+      {
+        id: 47,
+        topic: "Peran Buffer Saliva Ruminansia",
+        level: "C4 • Analisis",
+        stimulus: `Seekor sapi dewasa mampu memproduksi saliva (air liur) hingga <strong>100–150 liter per hari</strong>. Berbeda dengan saliva manusia yang mengandung enzim amilase ($\alpha$-ptialin) dan bervolume ~1–1,5 liter/hari, saliva sapi tidak mengandung enzim pencernaan melainkan sangat kaya akan ion <strong>bikarbonat ($HCO_3^-$)</strong> dan <strong>fosfat ($HPO_4^{2-}$)</strong> dengan pH sekitar 8,2.`,
+        question: "Fungsi fisiologis paling krusial dari sekresi saliva bervolume masif dan bersifat basa tersebut bagi kelangsungan ekosistem rumen adalah...",
+        options: [
+          "Menetralkan asam-asam lemak volatil (VFA) hasil fermentasi mikroba agar pH cairan rumen tetap stabil pada rentang optimal 6,2–6,8, mencegah kematian bakteri selulolitik akibat asidosis rumen.",
+          "Melarutkan seluruh selulosa rumput secara kimiawi sehingga tidak lagi memerlukan bantuan bakteri anaerob.",
+          "Menurunkan pH abomasum menjadi 8,2 agar enzim pepsin dan renin dapat bekerja menghidrolisis protein.",
+          "Menggantikan kebutuhan air minum sapi selama musim kemarau dengan menyerap uap air dari udara.",
+          "Membunuh protozoa patogen yang masuk bersama rumput kering."
+        ],
+        correctAnswer: 0,
+        explanation: "Fermentasi ribuan gram karbohidrat di rumen menghasilkan asam lemak volatil (VFA) dalam jumlah sangat besar yang berpotensi menurunkan pH rumen di bawah 5,5 (asidosis rumen subakut/akut) dan membunuh bakteri selulolitik. Saliva sapi yang bervolume 100–150 L/hari dengan kadar bikarbonat dan fosfat tinggi berperan sebagai sistem penyangga (buffer) utama penstabil pH rumen."
+      },
+      {
+        id: 48,
+        topic: "Evaluasi Foregut vs Hindgut Fermenter",
+        level: "C5 • Evaluasi",
+        stimulus: `Kelinci dan kuda merupakan herbivora non-ruminansia yang melakukan fermentasi selulosa di bagian belakang saluran pencernaan (<em>hindgut fermenters</em>), khususnya di <strong>sekum</strong> dan kolon yang membesar. Untuk bertahan hidup dari pakan rendah protein, kelinci secara alami melakukan perilaku <strong><em>cecotrophy</em></strong> (memakan kembali feses lunak khusus/<em>cecotropes</em> yang keluar pada malam hari langsung dari anusnya), sedangkan sapi tidak pernah melakukannya.`,
+        question: "Evaluasi anatomi dan fisiologi yang menjelaskan mengapa kelinci wajib melakukan <em>cecotrophy</em> sementara sapi tidak perlu melakukannya untuk memperoleh protein mikroba dan vitamin B kompleks adalah...",
+        options: [
+          "Sekum kelinci terletak di bagian distal SETELAH usus halus (tempat utama pencernaan dan absorpsi protein/vitamin), sehingga biomassa mikroba kaya protein dan vitamin dari sekum akan terbuang lewat feses jika tidak dimakan kembali untuk melewati lambung dan usus halus.",
+          "Kelinci tidak memiliki usus halus sehingga seluruh penyerapan nutrisi harus dilakukan dua kali di dalam lambung.",
+          "Bakteri di dalam sekum kelinci hanya mampu menghasilkan enzim amilase dan tidak bisa mensintesis vitamin B12.",
+          "Sapi menyerap seluruh protein mikroba secara langsung melalui epitel kolon desendens tanpa perlu dicerna enzim protease.",
+          "Feses sapi mengandung toksin amonia yang mematikan jika tertelan kembali ke dalam rumen."
+        ],
+        correctAnswer: 0,
+        explanation: "Pada kelinci (hindgut fermenter), lokasi fermentasi mikroba (sekum) berada SETELAH tempat utama absorpsi asam amino dan vitamin (usus halus). Oleh karena itu, kelinci mengekskresikan <em>cecotropes</em> lunak yang kaya vitamin B, vitamin K, dan protein bakteri untuk dimakan kembali (cecotrophy) agar dicerna di lambung dan diserap di usus halus. Pada sapi, fermentasi terjadi di depan (rumen), sehingga mikroba otomatis melewati abomasum dan usus halus."
+      },
+      {
+        id: 49,
+        topic: "Gangguan Kembung (Bloat) pada Ruminansia",
+        level: "C4 • Analisis",
+        stimulus: `Fermentasi anaerob di dalam rumen sapi menghasilkan gas metana ($CH_4$) dan karbon dioksida ($CO_2$) sebanyak 30–50 liter per jam yang normalnya dikeluarkan secara berkala melalui refleks <strong>eruktasi (sendawa)</strong>. Ketika sekelompok sapi dilepas ke padang rumput leguminosa (kacang-kacangan) muda yang sangat kaya protein terlarut dan saponin, beberapa sapi mengalami pembesaran perut kiri yang ekstrem (<em>bloat / timpani</em>) dan terancam mati lemas.`,
+        question: "Mekanisme patofisiologis yang menyebabkan gas hasil fermentasi gagal dikeluarkan melalui eruktasi pada kasus <em>frothy bloat</em> (kembung berbusa) tersebut adalah...",
+        options: [
+          "Protein terlarut dan saponin tanaman muda menurunkan tegangan permukaan cairan rumen sehingga gas terjebak dalam ribuan gelembung busa stabil yang menyumbat kardia (pintu esofagus) dan menghambat reseptor refleks sendawa, menekan diafragma serta paru-paru.",
+          "Leguminosa muda membunuh seluruh bakteri metanogen sehingga gas oksigen menumpuk di dalam abomasum.",
+          "Saponin menyebabkan kontraksi permanen pada sfingter pilorus sehingga cairan rumen mengalir balik ke rongga hidung.",
+          "Kelebihan protein leguminosa diubah menjadi es padat di dalam retikulum yang menutup jalan masuk ke omasum.",
+          "Gas metana diserap masuk ke dalam eritrosit dan menggantikan posisi oksigen pada hemoglobin."
+        ],
+        correctAnswer: 0,
+        explanation: "Pada <em>frothy bloat</em>, protein terlarut tinggi dan saponin dari leguminosa muda membentuk lapisan busa kental yang memerangkap gas $CH_4$ dan $CO_2$. Reseptor regang di sekitar kardia gagal mendeteksi gas bebas karena tertutup busa, sehingga refleks eruktasi tidak terpicu. Rumen yang mengembang menekan diafragma, menghambat ekspansi paru-paru dan aliran balik vena."
+      },
+      {
+        id: 50,
+        topic: "Sintesis Adaptasi Evolusioner Saluran Pencernaan",
+        level: "C6 • Mencipta",
+        stimulus: `Perhatikan tabel perbandingan morfologi saluran pencernaan tiga spesies mamalia dengan ukuran massa tubuh yang setara berikut ini:
+        <table class="stimulus-table">
+          <thead>
+            <tr><th>Ciri Morfologi</th><th>Spesies I</th><th>Spesies II</th><th>Spesies III</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Rasio Panjang Usus : Panjang Tubuh</td><td>4 : 1</td><td>10 : 1</td><td>22 : 1</td></tr>
+            <tr><td>Struktur Gigi</td><td>Taring panjang tajam, geraham karnasial pemotong</td><td>Gigi seri, taring kecil, geraham berpermukaan datar berlekuk</td><td>Tidak ada gigi seri atas (bantalan tanduk), geraham lebar bergelombang</td></tr>
+            <tr><td>Struktur Lambung & Sekum</td><td>Lambung tunggal kecil, sekum rudimenter</td><td>Lambung tunggal sedang, sekum kecil berapendiks</td><td>Lambung 4 ruang (poligastrik), sekum besar</td></tr>
+          </tbody>
+        </table>`,
+        question: "Berdasarkan sintesis hubungan antara struktur morfologi saluran pencernaan dengan efisiensi pencernaan biokimia makanannya, identifikasi dan kesimpulan yang paling tepat adalah...",
+        options: [
+          "Spesies I adalah herbivora ruminansia karena ususnya pendek agar selulosa cepat dikeluarkan sebelum membusuk.",
+          "Spesies I adalah karnivora (daging padat energi & mudah dicerna protease sehingga usus pendek), Spesies II adalah omnivora (manusia), dan Spesies III adalah herbivora ruminansia yang memerlukan saluran sangat panjang serta ruang fermentasi luas untuk mencerna dinding selulosa tumbuhan yang sulit didegradasi.",
+          "Spesies II adalah karnivora sejati karena memiliki gigi taring dan sekum yang telah tereduksi total.",
+          "Spesies III memiliki usus terpanjang karena daging memerlukan waktu absorpsi asam amino 5 kali lebih lama daripada tumbuhan.",
+          "Ketiga spesies memiliki komposisi enzim pencernaan endogen yang identik, hanya berbeda pada kecepatan gerak peristaltiknya."
+        ],
+        correctAnswer: 1,
+        explanation: "Adaptasi saluran pencernaan berkorelasi langsung dengan komposisi kimia pakan: jaringan hewan (Spesies I - karnivora) padat nutrisi, tidak memiliki dinding sel selulosa, dan cepat dicerna protease/lipase sehingga rasio usus pendek (4:1). Jaringan tumbuhan (Spesies III - ruminansia) memiliki dinding selulosa tebal yang memerlukan waktu fermentasi mikroba serta luas bidang absorpsi ekstra panjang (22:1). Spesies II menunjukkan karakteristik omnivora (manusia)."
+      }
+    ];
+  </script>
+
+  <!-- ==================== APPLICATION LOGIC & FIREBASE INTEGRATION ==================== -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import {
+      getAuth,
+      signInAnonymously,
+      signInWithCustomToken,
+      GoogleAuthProvider,
+      signInWithPopup,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      getDoc,
+      addDoc,
+      collection,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // ==================== 1. FIREBASE INITIALIZATION & AUTH FIRST ====================
+    const appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
+    let firebaseConfig = null;
+    try {
+      if (typeof __firebase_config !== "undefined" && __firebase_config) {
+        firebaseConfig = JSON.parse(__firebase_config);
+      }
+    } catch (e) {
+      console.warn("Firebase config parse skipped:", e);
+    }
+
+    let app = null;
+    let auth = null;
+    let db = null;
+    let currentUser = null;
+    let unsubscribeSubmissions = null;
+
+    // Application State (In-Memory)
+    window.appState = {
+      studentName: "",
+      studentClass: "",
+      currentQuestionIdx: 0,
+      answers: new Array(QUIZ_QUESTIONS.length).fill(null), // null or 0..4
+      flags: new Array(QUIZ_QUESTIONS.length).fill(false),
+      remainingSeconds: 75 * 60, // 75 minutes
+      quizStartTime: null,
+      timerInterval: null,
+      isSubmitted: false,
+      lastResult: null,
+      teacherAuthenticated: false,
+      creatorProfile: {
+        name: "Guru Biologi Kelas XI",
+        email: "pembuat.soal@biologi-xi.edu",
+        uid: "local-session",
+        webhookUrl: ""
+      },
+      allSubmissions: [] // Synced real-time from Firestore
+    };
+
+    async function initFirebase() {
+      if (!firebaseConfig) {
+        updateCloudBadge(false, "Mode Offline");
+        return;
+      }
+      try {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        // RULE 3: Authenticate FIRST before any Firestore operations
+        if (typeof __initial_auth_token !== "undefined" && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+
+        onAuthStateChanged(auth, async (user) => {
+          currentUser = user;
+          if (!user) return;
+          updateCloudBadge(true, "Terhubung ke Cloud");
+          await loadCreatorSettings();
+          subscribeToSubmissions();
+        });
+      } catch (err) {
+        console.error("Firebase init error:", err);
+        updateCloudBadge(false, "Mode Lokal");
+      }
+    }
+
+    function updateCloudBadge(connected, label) {
+      const badge = document.getElementById("cloud-status-badge");
+      if (!badge) return;
+      if (connected) {
+        badge.className = "inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 shrink-0";
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span><span>${label}</span>`;
+      } else {
+        badge.className = "inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200 shrink-0";
+        badge.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-500"></span><span>${label}</span>`;
+      }
+    }
+
+    // Load Creator Settings from Strict Path: /artifacts/{appId}/public/data/creator_settings/config
+    async function loadCreatorSettings() {
+      if (!db || !currentUser) return;
+      try {
+        const configRef = doc(db, "artifacts", appId, "public", "data", "creator_settings", "config");
+        const snap = await getDoc(configRef);
+        if (snap.exists()) {
+          const data = snap.data();
+          window.appState.creatorProfile = {
+            name: data.name || "Guru Biologi Kelas XI",
+            email: data.email || "pembuat.soal@biologi-xi.edu",
+            uid: data.uid || currentUser.uid,
+            webhookUrl: data.webhookUrl || ""
+          };
+          const homeLabel = document.getElementById("home-creator-label");
+          if (homeLabel) {
+            homeLabel.textContent = `${window.appState.creatorProfile.name} (${window.appState.creatorProfile.email})`;
+          }
+          const webhookInput = document.getElementById("webhook-url-input");
+          if (webhookInput && data.webhookUrl) {
+            webhookInput.value = data.webhookUrl;
+          }
+        }
+      } catch (err) {
+        console.warn("Could not load creator settings:", err);
+      }
+    }
+
+    // Subscribe to All Submissions from Strict Path: /artifacts/{appId}/public/data/quiz_submissions
+    // RULE 2: Simple collection() query ONLY (no orderBy/where/limit), sort & filter in JS memory!
+    function subscribeToSubmissions() {
+      if (!db || !currentUser) return;
+      if (unsubscribeSubmissions) unsubscribeSubmissions();
+
+      const colRef = collection(db, "artifacts", appId, "public", "data", "quiz_submissions");
+      unsubscribeSubmissions = onSnapshot(
+        colRef,
+        (snapshot) => {
+          const items = [];
+          snapshot.forEach((docSnap) => {
+            items.push({ id: docSnap.id, ...docSnap.data() });
+          });
+          // Sort newest first in JS memory
+          items.sort((a, b) => (b.submittedAtMs || 0) - (a.submittedAtMs || 0));
+          window.appState.allSubmissions = items;
+          if (window.appState.teacherAuthenticated) {
+            window.renderTeacherDashboard();
+          }
+        },
+        (error) => {
+          console.error("Firestore onSnapshot error:", error);
+        }
+      );
+    }
+
+    // Save Student Submission to Firestore + Optional Google Apps Script Webhook
+    window.saveSubmissionToCreatorAccount = async function (submissionRecord) {
+      // Keep local copy immediately so teacher dashboard in same session also sees it
+      window.appState.allSubmissions.unshift(submissionRecord);
+
+      if (db && currentUser) {
+        try {
+          const colRef = collection(db, "artifacts", appId, "public", "data", "quiz_submissions");
+          await addDoc(colRef, submissionRecord);
+        } catch (err) {
+          console.error("Error saving submission to Firestore:", err);
+          showToast("Nilai tersimpan lokal (gangguan sinkronisasi jaringan).", "warning");
+        }
+      }
+
+      // Optional forwarding to Teacher's Google Sheets Apps Script Webhook
+      const webhookUrl = window.appState.creatorProfile.webhookUrl;
+      if (webhookUrl && webhookUrl.startsWith("https://")) {
+        try {
+          await fetch(webhookUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(submissionRecord)
+          });
+        } catch (err) {
+          console.warn("Webhook forwarding skipped:", err);
+        }
+      }
+    };
+
+    // Teacher Auth via Google Sign-In
+    window.signInTeacherWithGoogle = async function () {
+      if (!auth) {
+        showToast("Layanan Google Auth tidak tersedia di pratinjau ini. Gunakan Klaim PIN Pembuat Soal.", "warning");
+        return;
+      }
+      try {
+        const provider = new GoogleAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        currentUser = user;
+
+        const profile = {
+          name: user.displayName || "Guru Pembuat Soal",
+          email: user.email || "guru@sekolah.sch.id",
+          uid: user.uid,
+          webhookUrl: window.appState.creatorProfile.webhookUrl || ""
+        };
+        await claimCreatorProfile(profile);
+        activateTeacherDashboard(profile);
+        showToast("Berhasil masuk dengan Akun Google Pembuat Soal!", "success");
+      } catch (err) {
+        console.warn("Google popup auth error:", err);
+        showToast("Popup Google diblokir browser/iframe. Silakan gunakan form Klaim Pembuat Soal di bawahnya.", "warning");
+      }
+    };
+
+    // Teacher Auth via Creator Name + Email + PIN
+    window.loginTeacherWithPin = async function () {
+      const nameVal = document.getElementById("teacher-name-input").value.trim() || "Guru Biologi Kelas XI";
+      const emailVal = document.getElementById("teacher-email-input").value.trim() || "guru.biologi@sekolah.sch.id";
+      const pinVal = document.getElementById("teacher-pin-input").value.trim();
+
+      if (pinVal !== "BIOXI2026") {
+        showToast("PIN Akses Dasbor salah! Gunakan BIOXI2026.", "error");
+        return;
+      }
+
+      const uid = currentUser ? currentUser.uid : "creator-" + Date.now();
+      const profile = {
+        name: nameVal,
+        email: emailVal,
+        uid: uid,
+        webhookUrl: window.appState.creatorProfile.webhookUrl || ""
+      };
+
+      await claimCreatorProfile(profile);
+      activateTeacherDashboard(profile);
+      showToast("Akun Pembuat Soal berhasil diklaim & dibuka!", "success");
+    };
+
+    async function claimCreatorProfile(profile) {
+      window.appState.creatorProfile = profile;
+      const homeLabel = document.getElementById("home-creator-label");
+      if (homeLabel) {
+        homeLabel.textContent = `${profile.name} (${profile.email})`;
+      }
+      if (db && currentUser) {
+        try {
+          const configRef = doc(db, "artifacts", appId, "public", "data", "creator_settings", "config");
+          await setDoc(configRef, profile, { merge: true });
+        } catch (err) {
+          console.warn("Could not save creator config:", err);
+        }
+      }
+    }
+
+    function activateTeacherDashboard(profile) {
+      window.appState.teacherAuthenticated = true;
+      document.getElementById("teacher-auth-panel").classList.add("hidden");
+      document.getElementById("teacher-dashboard-panel").classList.remove("hidden");
+
+      document.getElementById("dash-creator-uid").textContent = profile.uid;
+      document.getElementById("dash-creator-name").textContent = profile.name;
+      document.getElementById("dash-creator-email").textContent = `Email Pembuat Soal: ${profile.email} • Nilai siswa dikumpulkan otomatis ke akun ini.`;
+
+      window.renderTeacherDashboard();
+    }
+
+    window.logoutTeacher = function () {
+      window.appState.teacherAuthenticated = false;
+      document.getElementById("teacher-dashboard-panel").classList.add("hidden");
+      document.getElementById("teacher-auth-panel").classList.remove("hidden");
+      showToast("Keluar dari Dasbor Pembuat Soal.", "success");
+    };
+
+    window.saveWebhookUrl = async function () {
+      const url = document.getElementById("webhook-url-input").value.trim();
+      if (url && !url.startsWith("https://script.google.com/")) {
+        showToast("URL harus diawali https://script.google.com/...", "error");
+        return;
+      }
+      window.appState.creatorProfile.webhookUrl = url;
+      await claimCreatorProfile(window.appState.creatorProfile);
+      closeWebhookModal();
+      showToast("URL Webhook Google Sheets berhasil disimpan!", "success");
+    };
+
+    // Initialize Firebase on load
+    initFirebase();
+  </script>
+
+  <!-- ==================== INTERACTIVE QUIZ & DASHBOARD UI CONTROLLER ==================== -->
+  <script>
+    let currentQuestionIdx = 0;
+
+    // ==================== VIEW NAVIGATION ====================
+    function switchView(viewName) {
+      const views = ["home", "quiz", "result", "teacher"];
+      views.forEach((v) => {
+        const el = document.getElementById("view-" + v);
+        if (el) el.classList.add("hidden");
+      });
+      const target = document.getElementById("view-" + viewName);
+      if (target) target.classList.remove("hidden");
+
+      const liveBar = document.getElementById("quiz-live-bar");
+      const mobileSubbar = document.getElementById("mobile-student-subbar");
+      const navActions = document.getElementById("nav-actions");
+
+      if (viewName === "quiz") {
+        liveBar.classList.remove("hidden");
+        liveBar.classList.add("flex");
+        mobileSubbar.classList.remove("hidden");
+        navActions.classList.add("hidden");
+      } else {
+        liveBar.classList.add("hidden");
+        liveBar.classList.remove("flex");
+        mobileSubbar.classList.add("hidden");
+        navActions.classList.remove("hidden");
+      }
+
+      if (viewName === "teacher" && window.appState && window.appState.teacherAuthenticated) {
+        renderTeacherDashboard();
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    // ==================== STUDENT IDENTITY VALIDATION ====================
+    function handleClassSelectChange() {
+      const selectEl = document.getElementById("select-student-class");
+      const customWrapper = document.getElementById("custom-class-wrapper");
+      if (selectEl.value === "CUSTOM") {
+        customWrapper.classList.remove("hidden");
+        document.getElementById("input-custom-class").focus();
+      } else {
+        customWrapper.classList.add("hidden");
+      }
+      validateStudentForm();
+    }
+
+    function getResolvedStudentClass() {
+      const selectVal = document.getElementById("select-student-class").value;
+      if (selectVal === "CUSTOM") {
+        return document.getElementById("input-custom-class").value.trim();
+      }
+      return selectVal;
+    }
+
+    function validateStudentForm() {
+      const nameVal = document.getElementById("input-student-name").value.trim();
+      const classVal = getResolvedStudentClass();
+      const startBtn = document.getElementById("btn-start-quiz");
+
+      if (nameVal.length >= 2 && classVal.length >= 2) {
+        startBtn.disabled = false;
+        startBtn.className = "w-full py-4 px-6 rounded-2xl font-display font-bold text-base text-white bg-emerald-600 hover:bg-emerald-700 active:scale-[0.99] cursor-pointer transition-all flex items-center justify-center gap-2 shadow-md";
+        startBtn.innerHTML = `
+          <span>Mulai Mengerjakan Kuis (50 Soal)</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        `;
+      } else {
+        startBtn.disabled = true;
+        startBtn.className = "w-full py-4 px-6 rounded-2xl font-display font-bold text-base text-white bg-slate-300 cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-sm";
+        startBtn.innerHTML = `
+          <span>Lengkapi Nama & Kelas untuk Memulai Kuis</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        `;
+      }
+    }
+
+    // ==================== START QUIZ & TIMER ====================
+    function startQuiz() {
+      const nameVal = document.getElementById("input-student-name").value.trim();
+      const classVal = getResolvedStudentClass();
+      if (!nameVal || !classVal) {
+        showToast("Harap isi Nama Lengkap dan Kelas terlebih dahulu.", "error");
+        return;
+      }
+
+      window.appState.studentName = nameVal;
+      window.appState.studentClass = classVal;
+      window.appState.answers = new Array(QUIZ_QUESTIONS.length).fill(null);
+      window.appState.flags = new Array(QUIZ_QUESTIONS.length).fill(false);
+      window.appState.remainingSeconds = 75 * 60;
+      window.appState.quizStartTime = Date.now();
+      window.appState.isSubmitted = false;
+      currentQuestionIdx = 0;
+
+      // Populate persistent header badges
+      document.getElementById("header-student-name").textContent = nameVal;
+      document.getElementById("header-student-class").textContent = classVal;
+      document.getElementById("mobile-header-name").textContent = nameVal;
+      document.getElementById("mobile-header-class").textContent = classVal;
+
+      buildQuestionGrid();
+      renderQuestion(0);
+      startCountdownTimer();
+      switchView("quiz");
+      showToast(`Selamat mengerjakan, ${nameVal}!`, "success");
+    }
+
+    function startCountdownTimer() {
+      if (window.appState.timerInterval) clearInterval(window.appState.timerInterval);
+      updateTimerDisplay();
+
+      window.appState.timerInterval = setInterval(() => {
+        window.appState.remainingSeconds--;
+        updateTimerDisplay();
+
+        if (window.appState.remainingSeconds <= 300) {
+          document.getElementById("timer-badge").className = "flex items-center gap-1.5 bg-rose-100 border border-rose-300 text-rose-900 px-3 py-1.5 rounded-xl font-mono font-bold text-sm animate-pulse";
+        }
+
+        if (window.appState.remainingSeconds <= 0) {
+          clearInterval(window.appState.timerInterval);
+          showToast("Waktu habis! Jawaban Anda otomatis dikumpulkan.", "warning");
+          confirmSubmitQuiz(true);
+        }
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const sec = Math.max(0, window.appState.remainingSeconds);
+      const mins = Math.floor(sec / 60);
+      const remSec = sec % 60;
+      document.getElementById("timer-display").textContent = `${String(mins).padStart(2, "0")}:${String(remSec).padStart(2, "0")}`;
+    }
+
+    // ==================== QUESTION RENDERING & GRID ====================
+    function buildQuestionGrid() {
+      const grid = document.getElementById("question-grid");
+      grid.innerHTML = "";
+      for (let i = 0; i < QUIZ_QUESTIONS.length; i++) {
+        const btn = document.createElement("button");
+        btn.id = `grid-btn-${i}`;
+        btn.textContent = i + 1;
+        btn.onclick = () => navigateQuestion(i);
+        grid.appendChild(btn);
+      }
+      refreshQuestionGridStyles();
+    }
+
+    function refreshQuestionGridStyles() {
+      let answeredCount = 0;
+      for (let i = 0; i < QUIZ_QUESTIONS.length; i++) {
+        const btn = document.getElementById(`grid-btn-${i}`);
+        if (!btn) continue;
+
+        const isAnswered = window.appState.answers[i] !== null;
+        const isFlagged = window.appState.flags[i];
+        const isCurrent = i === currentQuestionIdx;
+
+        if (isAnswered) answeredCount++;
+
+        let baseClass = "h-10 rounded-xl font-display font-bold text-xs transition flex items-center justify-center cursor-pointer ";
+        if (isFlagged) {
+          baseClass += "bg-amber-400 text-amber-950 border border-amber-500 ";
+        } else if (isAnswered) {
+          baseClass += "bg-emerald-600 text-white border border-emerald-700 ";
+        } else {
+          baseClass += "bg-white text-slate-700 border border-slate-300 hover:bg-slate-50 ";
+        }
+
+        if (isCurrent) {
+          baseClass += "ring-2 ring-offset-2 ring-blue-600 scale-105 ";
+        }
+        btn.className = baseClass;
+      }
+      document.getElementById("answered-counter-badge").textContent = `${answeredCount} / ${QUIZ_QUESTIONS.length} Dijawab`;
+    }
+
+    function navigateQuestion(idx) {
+      if (idx < 0 || idx >= QUIZ_QUESTIONS.length) return;
+      currentQuestionIdx = idx;
+      renderQuestion(idx);
+      refreshQuestionGridStyles();
+    }
+
+    function renderQuestion(idx) {
+      const q = QUIZ_QUESTIONS[idx];
+      document.getElementById("q-number-badge").textContent = `Soal ${idx + 1} / ${QUIZ_QUESTIONS.length}`;
+      document.getElementById("q-level-badge").textContent = q.level;
+      document.getElementById("q-topic-badge").textContent = q.topic;
+      document.getElementById("q-stimulus-box").innerHTML = q.stimulus;
+      document.getElementById("q-stem").innerHTML = q.question;
+
+      // Render 5 Options (A, B, C, D, E)
+      const letters = ["A", "B", "C", "D", "E"];
+      const container = document.getElementById("q-options-container");
+      container.innerHTML = "";
+
+      q.options.forEach((optText, optIdx) => {
+        const isSelected = window.appState.answers[idx] === optIdx;
+        const card = document.createElement("button");
+        card.type = "button";
+        card.onclick = () => selectOption(idx, optIdx);
+
+        card.className = isSelected
+          ? "w-full text-left p-4 rounded-2xl border-2 border-emerald-600 bg-emerald-50/70 flex items-start gap-3.5 transition cursor-pointer shadow-2xs"
+          : "w-full text-left p-4 rounded-2xl border border-slate-200 hover:border-emerald-400 hover:bg-slate-50 flex items-start gap-3.5 transition cursor-pointer";
+
+        card.innerHTML = `
+          <span class="w-8 h-8 rounded-xl font-display font-bold text-sm flex items-center justify-center shrink-0 ${
+            isSelected ? "bg-emerald-600 text-white" : "bg-slate-100 text-slate-700"
+          }">${letters[optIdx]}</span>
+          <span class="text-sm sm:text-base ${isSelected ? "font-semibold text-emerald-950" : "text-slate-700"} leading-relaxed pt-0.5">${optText}</span>
+        `;
+        container.appendChild(card);
+      });
+
+      // Update Flag button appearance
+      const flagBtn = document.getElementById("btn-flag-q");
+      const flagText = document.getElementById("flag-btn-text");
+      if (window.appState.flags[idx]) {
+        flagBtn.className = "px-4 py-2.5 rounded-xl border border-amber-500 bg-amber-400 text-amber-950 font-bold text-sm flex items-center gap-2 transition cursor-pointer";
+        flagText.textContent = "Ditandai Ragu-Ragu ✓";
+      } else {
+        flagBtn.className = "px-4 py-2.5 rounded-xl border border-amber-300 bg-amber-50 text-amber-800 hover:bg-amber-100 font-semibold text-sm flex items-center gap-2 transition cursor-pointer";
+        flagText.textContent = "Tandai Ragu-Ragu";
+      }
+
+      // Prev / Next button states
+      document.getElementById("btn-prev-q").disabled = idx === 0;
+      const nextBtn = document.getElementById("btn-next-q");
+      if (idx === QUIZ_QUESTIONS.length - 1) {
+        nextBtn.innerHTML = `<span>Selesai & Kumpulkan</span>`;
+        nextBtn.onclick = () => openSubmitModal();
+      } else {
+        nextBtn.innerHTML = `<span>Selanjutnya</span><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>`;
+        nextBtn.onclick = () => navigateQuestion(idx + 1);
+      }
+    }
+
+    function selectOption(qIdx, optIdx) {
+      window.appState.answers[qIdx] = optIdx;
+      renderQuestion(qIdx);
+      refreshQuestionGridStyles();
+    }
+
+    function toggleFlagCurrent() {
+      window.appState.flags[currentQuestionIdx] = !window.appState.flags[currentQuestionIdx];
+      renderQuestion(currentQuestionIdx);
+      refreshQuestionGridStyles();
+    }
+
+    // ==================== SUBMIT & SCORING ====================
+    function openSubmitModal() {
+      const answered = window.appState.answers.filter((a) => a !== null).length;
+      const flagged = window.appState.flags.filter((f) => f).length;
+      const empty = QUIZ_QUESTIONS.length - answered;
+
+      document.getElementById("modal-submit-summary").innerHTML = `
+        <div class="flex justify-between"><span>Peserta:</span><strong>${window.appState.studentName} (${window.appState.studentClass})</strong></div>
+        <div class="flex justify-between"><span>Soal Terjawab:</span><strong class="text-emerald-700">${answered} dari 50 soal</strong></div>
+        <div class="flex justify-between"><span>Ditandai Ragu-Ragu:</span><strong class="text-amber-600">${flagged} soal</strong></div>
+        <div class="flex justify-between"><span>Belum Dijawab (Kosong):</span><strong class="text-rose-600">${empty} soal</strong></div>
+      `;
+      document.getElementById("modal-submit").classList.remove("hidden");
+    }
+
+    function closeSubmitModal() {
+      document.getElementById("modal-submit").classList.add("hidden");
+    }
+
+    async function confirmSubmitQuiz(isAutoTimeout) {
+      if (window.appState.isSubmitted) return;
+      window.appState.isSubmitted = true;
+      closeSubmitModal();
+      if (window.appState.timerInterval) clearInterval(window.appState.timerInterval);
+
+      let correctCount = 0;
+      let wrongCount = 0;
+      let emptyCount = 0;
+
+      // Group topic performance
+      const topicStats = {};
+      QUIZ_QUESTIONS.forEach((q, idx) => {
+        if (!topicStats[q.topic]) {
+          topicStats[q.topic] = { total: 0, correct: 0 };
+        }
+        topicStats[q.topic].total++;
+
+        const ans = window.appState.answers[idx];
+        if (ans === null) {
+          emptyCount++;
+        } else if (ans === q.correctAnswer) {
+          correctCount++;
+          topicStats[q.topic].correct++;
+        } else {
+          wrongCount++;
+        }
+      });
+
+      const finalScore = Math.round((correctCount / QUIZ_QUESTIONS.length) * 100);
+      const elapsedSeconds = Math.max(1, Math.round((Date.now() - window.appState.quizStartTime) / 1000));
+      const durMins = Math.floor(elapsedSeconds / 60);
+      const durSecs = elapsedSeconds % 60;
+      const durasiText = `${durMins} mnt ${durSecs} dtk`;
+
+      const now = new Date();
+      const submittedAtText = now.toLocaleString("id-ID", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      // Serialize answers as compact JSON string (Firestore safe)
+      const submissionRecord = {
+        nama: window.appState.studentName,
+        kelas: window.appState.studentClass,
+        skor: finalScore,
+        benar: correctCount,
+        salah: wrongCount,
+        kosong: emptyCount,
+        durasiDetik: elapsedSeconds,
+        durasiText: durasiText,
+        submittedAtMs: Date.now(),
+        submittedAtText: submittedAtText,
+        answersJson: JSON.stringify(window.appState.answers)
+      };
+
+      // Save to Creator Account (Firestore + optional Google Sheets webhook)
+      if (typeof window.saveSubmissionToCreatorAccount === "function") {
+        await window.saveSubmissionToCreatorAccount(submissionRecord);
+      }
+
+      renderStudentResultScreen(submissionRecord, topicStats);
+      switchView("result");
+      if (!isAutoTimeout) {
+        showToast("Jawaban berhasil dikumpulkan ke akun pembuat soal!", "success");
+      }
+    }
+
+    function renderStudentResultScreen(record, topicStats) {
+      document.getElementById("res-student-name").textContent = record.nama;
+      document.getElementById("res-student-class").textContent = record.kelas;
+      document.getElementById("res-duration").textContent = record.durasiText;
+      document.getElementById("res-final-score").textContent = record.skor;
+      document.getElementById("res-correct-count").textContent = record.benar;
+      document.getElementById("res-wrong-count").textContent = record.salah;
+      document.getElementById("res-empty-count").textContent = record.kosong;
+
+      // Render Topic Mastery Breakdown
+      const breakdownEl = document.getElementById("res-topic-breakdown");
+      breakdownEl.innerHTML = "";
+      Object.entries(topicStats).forEach(([topicName, stat]) => {
+        const pct = Math.round((stat.correct / stat.total) * 100);
+        const barColor = pct >= 75 ? "bg-emerald-600" : pct >= 50 ? "bg-amber-500" : "bg-rose-500";
+        const card = document.createElement("div");
+        card.className = "p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-2";
+        card.innerHTML = `
+          <div class="flex justify-between items-start gap-2">
+            <span class="text-xs font-semibold text-slate-700 leading-snug">${topicName}</span>
+            <span class="text-xs font-bold text-slate-900 shrink-0">${stat.correct}/${stat.total} (${pct}%)</span>
+          </div>
+          <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div class="${barColor} h-full rounded-full" style="width: ${pct}%"></div>
+          </div>
+        `;
+        breakdownEl.appendChild(card);
+      });
+
+      filterReview("all");
+    }
+
+    function filterReview(mode) {
+      ["all", "wrong", "correct"].forEach((m) => {
+        const btn = document.getElementById("rev-filter-" + m);
+        if (!btn) return;
+        btn.className = m === mode
+          ? "px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white cursor-pointer"
+          : "px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+      });
+
+      const listEl = document.getElementById("res-review-list");
+      listEl.innerHTML = "";
+      const letters = ["A", "B", "C", "D", "E"];
+
+      QUIZ_QUESTIONS.forEach((q, idx) => {
+        const userAns = window.appState.answers[idx];
+        const isCorrect = userAns === q.correctAnswer;
+
+        if (mode === "correct" && !isCorrect) return;
+        if (mode === "wrong" && isCorrect) return;
+
+        const statusBadge = isCorrect
+          ? `<span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-lg">✓ Benar</span>`
+          : userAns === null
+          ? `<span class="bg-slate-200 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-lg">• Kosong</span>`
+          : `<span class="bg-rose-100 text-rose-800 text-xs font-bold px-2.5 py-1 rounded-lg">✕ Salah</span>`;
+
+        const userChoiceText = userAns !== null ? `${letters[userAns]}. ${q.options[userAns]}` : "Tidak dijawab";
+        const correctChoiceText = `${letters[q.correctAnswer]}. ${q.options[q.correctAnswer]}`;
+
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-3xl border border-slate-200 p-5 sm:p-6 space-y-4 shadow-2xs";
+        card.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
+            <div class="flex items-center gap-2">
+              <span class="font-display font-bold text-sm text-slate-900">Soal #${q.id}</span>
+              <span class="text-xs text-slate-500">• ${q.topic} (${q.level})</span>
+            </div>
+            ${statusBadge}
+          </div>
+          <div class="text-xs sm:text-sm text-slate-600 bg-slate-50 p-3.5 rounded-2xl border border-slate-100">${q.stimulus}</div>
+          <div class="text-sm sm:text-base font-semibold text-slate-900">${q.question}</div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs sm:text-sm">
+            <div class="p-3 rounded-xl border ${isCorrect ? "bg-emerald-50 border-emerald-200 text-emerald-900" : "bg-rose-50 border-rose-200 text-rose-900"}">
+              <div class="font-bold mb-1">Jawaban Anda:</div>
+              <div>${userChoiceText}</div>
+            </div>
+            <div class="p-3 rounded-xl border bg-emerald-50/70 border-emerald-200 text-emerald-950">
+              <div class="font-bold mb-1">Kunci Jawaban Benar:</div>
+              <div>${correctChoiceText}</div>
+            </div>
+          </div>
+          <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-4 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <strong class="text-blue-900 block mb-1">Pembahasan Konseptual:</strong>
+            ${q.explanation}
+          </div>
+        `;
+        listEl.appendChild(card);
+      });
+    }
+
+    // ==================== TEACHER / CREATOR DASHBOARD RENDERING ====================
+    window.renderTeacherDashboard = function () {
+      const subs = window.appState.allSubmissions || [];
+      const total = subs.length;
+
+      document.getElementById("stat-total-students").textContent = total;
+
+      if (total === 0) {
+        document.getElementById("stat-avg-score").textContent = "0.0";
+        document.getElementById("stat-max-score").textContent = "0";
+        document.getElementById("stat-max-student").textContent = "-";
+        document.getElementById("stat-pass-rate").textContent = "0%";
+        document.getElementById("stat-pass-count").textContent = "0 dari 0 siswa";
+      } else {
+        const sumScore = subs.reduce((acc, s) => acc + (Number(s.skor) || 0), 0);
+        const avg = (sumScore / total).toFixed(1);
+        const maxSub = subs.reduce((best, cur) => ((cur.skor || 0) > (best.skor || 0) ? cur : best), subs[0]);
+        const passed = subs.filter((s) => (Number(s.skor) || 0) >= 75).length;
+        const passPct = Math.round((passed / total) * 100);
+
+        document.getElementById("stat-avg-score").textContent = avg;
+        document.getElementById("stat-max-score").textContent = maxSub.skor;
+        document.getElementById("stat-max-student").textContent = `${maxSub.nama} (${maxSub.kelas})`;
+        document.getElementById("stat-pass-rate").textContent = `${passPct}%`;
+        document.getElementById("stat-pass-count").textContent = `${passed} dari ${total} siswa`;
+      }
+
+      renderTeacherTable();
+      renderHardestQuestionsAnalysis();
+    };
+
+    function renderTeacherTable() {
+      const subs = window.appState.allSubmissions || [];
+      const classFilter = document.getElementById("filter-class-select").value;
+      const searchVal = document.getElementById("search-student-input").value.trim().toLowerCase();
+
+      const filtered = subs.filter((s) => {
+        const matchClass = classFilter === "ALL" || s.kelas === classFilter;
+        const matchName = !searchVal || (s.nama || "").toLowerCase().includes(searchVal) || (s.kelas || "").toLowerCase().includes(searchVal);
+        return matchClass && matchName;
+      });
+
+      const tbody = document.getElementById("teacher-scores-tbody");
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" class="py-10 text-center text-slate-400">Tidak ada data siswa yang cocok dengan filter.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = "";
+      filtered.forEach((s, idx) => {
+        const scoreBadge = s.skor >= 75
+          ? `<span class="inline-block bg-emerald-100 text-emerald-800 font-display font-bold px-3 py-1 rounded-xl">${s.skor}</span>`
+          : `<span class="inline-block bg-rose-100 text-rose-800 font-display font-bold px-3 py-1 rounded-xl">${s.skor}</span>`;
+
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-slate-50/80 transition";
+        tr.innerHTML = `
+          <td class="py-3.5 px-4 text-slate-500 font-medium">${idx + 1}</td>
+          <td class="py-3.5 px-4 font-semibold text-slate-900">${s.nama}</td>
+          <td class="py-3.5 px-4"><span class="bg-slate-100 text-slate-700 font-semibold text-xs px-2.5 py-1 rounded-lg">${s.kelas}</span></td>
+          <td class="py-3.5 px-4 text-center">${scoreBadge}</td>
+          <td class="py-3.5 px-4 text-center text-xs font-medium">
+            <span class="text-emerald-700 font-bold">${s.benar}B</span> /
+            <span class="text-rose-600 font-bold">${s.salah}S</span> /
+            <span class="text-slate-500">${s.kosong}K</span>
+          </td>
+          <td class="py-3.5 px-4 text-xs text-slate-600">${s.durasiText || "-"}</td>
+          <td class="py-3.5 px-4 text-xs text-slate-500">${s.submittedAtText || "-"}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderHardestQuestionsAnalysis() {
+      const subs = window.appState.allSubmissions || [];
+      const container = document.getElementById("hardest-questions-list");
+
+      if (subs.length === 0) {
+        container.innerHTML = `<div class="text-center py-8 text-sm text-slate-400">Analisis soal tersulit akan muncul otomatis setelah minimal 1 siswa mengumpulkan jawaban.</div>`;
+        return;
+      }
+
+      // Compute accuracy per question (0..49)
+      const qStats = QUIZ_QUESTIONS.map((q, qIdx) => {
+        let correctCount = 0;
+        subs.forEach((s) => {
+          try {
+            const ansArr = typeof s.answersJson === "string" ? JSON.parse(s.answersJson) : [];
+            if (ansArr[qIdx] === q.correctAnswer) correctCount++;
+          } catch (e) {}
+        });
+        const pctCorrect = Math.round((correctCount / subs.length) * 100);
+        return {
+          id: q.id,
+          topic: q.topic,
+          level: q.level,
+          question: q.question,
+          correctCount,
+          totalAttempts: subs.length,
+          pctCorrect
+        };
+      });
+
+      // Sort ascending by % correct (hardest first), display top 10
+      qStats.sort((a, b) => a.pctCorrect - b.pctCorrect);
+      const topHardest = qStats.slice(0, 10);
+
+      container.innerHTML = "";
+      topHardest.forEach((item) => {
+        const barColor = item.pctCorrect < 40 ? "bg-rose-500" : item.pctCorrect < 70 ? "bg-amber-500" : "bg-emerald-500";
+        const row = document.createElement("div");
+        row.className = "p-4 rounded-2xl border border-slate-200 bg-slate-50/70 space-y-2";
+        row.innerHTML = `
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="bg-slate-900 text-white font-display font-bold text-xs px-2.5 py-1 rounded-lg">Soal #${item.id}</span>
+              <span class="text-xs font-semibold text-blue-700">${item.topic}</span>
+              <span class="text-xs text-slate-500">(${item.level})</span>
+            </div>
+            <span class="text-xs font-bold text-rose-700 bg-rose-100 px-2.5 py-1 rounded-lg">
+              Menjawab Benar: ${item.correctCount}/${item.totalAttempts} (${item.pctCorrect}%)
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-700 line-clamp-2">${item.question}</p>
+          <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div class="${barColor} h-full rounded-full" style="width: ${item.pctCorrect}%"></div>
+          </div>
+        `;
+        container.appendChild(row);
+      });
+    }
+
+    function switchTeacherSubtab(tab) {
+      const scoresPanel = document.getElementById("teacher-subtab-scores");
+      const analysisPanel = document.getElementById("teacher-subtab-analysis");
+      const filterControls = document.getElementById("teacher-filter-controls");
+      const btnScores = document.getElementById("subtab-btn-scores");
+      const btnAnalysis = document.getElementById("subtab-btn-analysis");
+
+      if (tab === "scores") {
+        scoresPanel.classList.remove("hidden");
+        analysisPanel.classList.add("hidden");
+        filterControls.classList.remove("hidden");
+        btnScores.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-white cursor-pointer";
+        btnAnalysis.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+      } else {
+        scoresPanel.classList.add("hidden");
+        analysisPanel.classList.remove("hidden");
+        filterControls.classList.add("hidden");
+        btnAnalysis.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-900 text-white cursor-pointer";
+        btnScores.className = "px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+      }
+    }
+
+    // ==================== EXPORT CSV / EXCEL ====================
+    function exportSubmissionsCSV() {
+      const subs = window.appState.allSubmissions || [];
+      if (subs.length === 0) {
+        showToast("Belum ada data nilai siswa untuk diunduh.", "warning");
+        return;
+      }
+
+      const headers = ["No", "Nama Lengkap Siswa", "Kelas", "Skor Akhir", "Benar", "Salah", "Kosong", "Durasi", "Waktu Pengumpulan"];
+      const rows = subs.map((s, idx) => [
+        idx + 1,
+        `"${(s.nama || "").replace(/"/g, '""')}"`,
+        `"${(s.kelas || "").replace(/"/g, '""')}"`,
+        s.skor,
+        s.benar,
+        s.salah,
+        s.kosong,
+        `"${s.durasiText || ""}"`,
+        `"${s.submittedAtText || ""}"`
+      ]);
+
+      // UTF-8 BOM for clean Excel opening in Indonesia
+      const csvContent = "\uFEFF" + [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Rekap_Nilai_Biologi_XI_Pencernaan_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast("File Rekap Excel (.CSV) berhasil diunduh!", "success");
+    }
+
+    // ==================== WEBHOOK MODAL & CLIPBOARD (execCommand) ====================
+    function openWebhookModal() {
+      document.getElementById("modal-webhook").classList.remove("hidden");
+    }
+    function closeWebhookModal() {
+      document.getElementById("modal-webhook").classList.add("hidden");
+    }
+    function copyAppsScriptCode() {
+      const codeText = document.getElementById("apps-script-code").textContent;
+      const tempArea = document.createElement("textarea");
+      tempArea.value = codeText;
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      try {
+        document.execCommand("copy");
+        showToast("Kode Google Apps Script berhasil disalin!", "success");
+      } catch (err) {
+        showToast("Gagal menyalin otomatis. Silakan blok dan salin manual.", "warning");
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    // ==================== TOAST NOTIFICATION HELPER ====================
+    let toastTimeout = null;
+    function showToast(message, type = "success") {
+      const toast = document.getElementById("toast-notification");
+      const msgEl = document.getElementById("toast-message");
+      const iconEl = document.getElementById("toast-icon");
+
+      msgEl.textContent = message;
+      if (type === "error") {
+        iconEl.className = "w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0";
+      } else if (type === "warning") {
+        iconEl.className = "w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0";
+      } else {
+        iconEl.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0";
+      }
+
+      toast.classList.remove("hidden");
+      if (toastTimeout) clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 3600);
+    }
+  </script>
+</body>
+</html>
